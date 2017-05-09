@@ -1,0 +1,41 @@
+:local .canvasDDView {
+  width: 100%;
+
+  :local .canvasView {
+    margin: 0 auto;
+    width: 261px;
+
+    & > div {
+      display: inline-block;
+    }
+
+    :global .cursor {
+      border: 1px solid #2b2b2b;
+      position: absolute;
+      content: " ";
+      box-shadow: rgba(0, 0, 0, 0.117647) 0px 1px 6px, rgba(0, 0, 0, 0.117647) 0px 1px 4px;
+    }
+
+    :local .linerView {
+      padding-left: 6px;
+      position: relative;
+      :global .cursor {
+        width: 11px;
+        height: 8px;
+        margin-left: -3px;
+        margin-top: -4px;
+      }
+    }
+
+    :local .placeView {
+      position: relative;
+      :global .cursor {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        margin-left: -5px;
+        margin-top: -5px;
+      }
+    }
+  }
+}
