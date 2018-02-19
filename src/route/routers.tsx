@@ -1,8 +1,8 @@
 import * as React from "react";
 import {Route, Router} from "react-router";
 import history from "./history";
-import {ColorPicker} from "../components/colorPicker/colorPicker";
 import {FullDiv} from "../components/fullDiv";
+import {MainView} from "../components/mainView/mainView";
 
 export interface RoutersProps {
 }
@@ -16,8 +16,7 @@ export class Routers extends React.Component<RoutersProps, RoutersState> {
         return (
             <Router history={history}>
                 <FullDiv>
-                    <Route exact path="/" component={ColorPicker}/>
-                    <Route exact path="/color/:color" component={ColorPicker}/>
+                    <Route exact path="/" component={MainView}/>
                 </FullDiv>
             </Router>
         );

@@ -5,7 +5,7 @@ var path = require("path");
 
 var indexHtmlWebpackPlugin = new HtmlWebpackPlugin({
     filename:  path.join(__dirname, "public/index.html"),
-    title: "Color Picker",
+    title: "Visualizer",
     hash: false,
     inject: "head"
 });

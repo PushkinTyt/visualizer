@@ -24,7 +24,7 @@ export class App extends Component<AppProps, AppState> {
                     <AppBar
                         zDepth={2}
                         showMenuIconButton={false}
-                        title="Color Picker"
+                        title="Visualizer"
                     />
                     <div className={mainClass}>
                         <PerfectScrollbar>

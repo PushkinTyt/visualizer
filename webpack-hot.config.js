@@ -20,14 +20,15 @@ config.module.loaders = loaders.concat(config.module.loaders);
 config.devServer = {
     host: '0.0.0.0',
     port: 3000,
-    contentBase: 'public'
+    contentBase: 'public',
+    disableHostCheck: true
 };
 
 config.plugins = config.plugins.slice(1);
-// config.plugins.push(new WebpackBuildNotifierPlugin({
-//     title: "Hot Reload build",
-//     suppressWarning: true
-// }));
+config.plugins.push(new WebpackBuildNotifierPlugin({
+    title: "Hot Reload build",
+    suppressWarning: true
+}));
 config.plugins.push(
     new webpack.HotModuleReplacementPlugin()
 );
