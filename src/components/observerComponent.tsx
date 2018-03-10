@@ -2,9 +2,9 @@ import * as React from "react";
 
 export abstract class ObserverComponent<P, S> extends React.Component<P, S> {
 
-    componentWillReact() {
-        console.log(`Component ${this.getName()} will re-render`);
-    }
+    // componentWillReact() {
+    //     console.log(`Component ${this.getName()} will re-render`);
+    // }
 
     abstract getName(): string;
 
