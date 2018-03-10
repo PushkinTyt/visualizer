@@ -1,6 +1,5 @@
 import {AbstractAlg} from "../algirithms/abstractAlg";
 import {observable, ObservableMap} from "mobx";
-import {ArrayState} from "./arrayState";
 import {ViewState} from "./viewState";
 import {BabbleALG} from "../algirithms/babble/babbleALG";
 
@@ -12,8 +11,10 @@ export class AlgorithmChooser {
 
     algorithms: ObservableMap<AbstractAlg> = new ObservableMap<AbstractAlg>();
 
-    constructor(private arrayState: ArrayState, private viewState: ViewState) {
-        this.algorithms.set(BabbleALG.id, new BabbleALG(arrayState, viewState))
+    constructor(private viewState: ViewState) {
+        let babbleALG = new BabbleALG(viewState);
+        this.algorithms.set(BabbleALG.id, babbleALG)
+        this.choose(babbleALG)
     }
 
     choose(alg: AbstractAlg) {

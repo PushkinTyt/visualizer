@@ -1,18 +1,19 @@
 import {AbstractView} from "./abstractView";
-import {ArrayState} from "../stores/arrayState";
 import {ViewState} from "../stores/viewState";
 
-
 export abstract class AbstractAlg {
-    static id:string;
+    static id: string;
 
-    abstract step():void;
+    abstract stepForward(): void;
 
-    abstract init():void;
+    abstract stepBack(): void;
+
+    // сброс в ноль состояние
+    abstract init(): void;
 
     abstract getViews(): AbstractView[]
 
-    constructor(protected arrayState: ArrayState, protected viewState:ViewState) {
+    constructor(protected viewState: ViewState) {
 
     }
 }

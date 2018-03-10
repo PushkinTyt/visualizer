@@ -3,13 +3,16 @@ import {AbstractView} from "../abstractView";
 
 
 export class BabbleALG extends AbstractAlg {
+    stepBack(): void {
+    }
 
     static id = 'BabbleALG';
 
     init(): void {
     }
 
-    step(): void {
+    stepForward(): void {
+        this.viewState.currtentAlgorithmState.stepNumber++
     }
 
     getViews(): AbstractView[] {
