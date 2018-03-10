@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test_version": "node -v && npm --version",
-    "npmInstall": "yarn",
+    "yarn_install": "yarn",
     "build_web_singl": "webpack",
     "build_web_watch": "webpack --colors --watch",
     "build_web_hot": "webpack-dev-server --config webpack-hot.config.js --colors --inline --hot"
