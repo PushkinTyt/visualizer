@@ -34,15 +34,24 @@ export class Step extends React.Component<StepProps, {}> {
 
     render() {
         let viewState = this.props.viewState;
-        let stepNumber = viewState && viewState.stepNumber + 1;
         let currentStep = viewState && viewState.currentStep;
         let message = currentStep && currentStep.message;
+        let listingLineIdent = currentStep && currentStep.listingLineIdent;
+        let permutationCount = currentStep && currentStep.permutationCount;
+        let comparisonCount = currentStep && currentStep.comparisonCount;
+        let stepNumber = currentStep != undefined && currentStep.stepNumber != undefined
+            && currentStep.stepNumber + 1;
 
         return (
             <div>
                 <span>
-                   Номер шага: {stepNumber} <br/> {message}
+                   Номер шага: {stepNumber} <br/>
+                    Строчка листинга: {listingLineIdent}<br/>
+                    Сравнений {comparisonCount} <br/>
+                    Перестановок {permutationCount}<br/> <br/>
+                    {message}
                 </span>
+                <br/>
                 <br/>
                 <button onClick={this.back}>
                     back

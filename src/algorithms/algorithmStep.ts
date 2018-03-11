@@ -1,34 +1,31 @@
 import {observable} from "mobx";
-import {ArrayElement} from "./arrayElement";
 import {ArrayElementHighlight} from "./arrayElementHighlight";
 
-export enum Operations {
-    FORWARD,
-    BACK
-}
-
 export class AlgorithmStep {
+
+    @observable
+    stepNumber: number | null = null;
 
     @observable
     listingLineIdent: string;
 
     @observable
-    permutationCount: number = 0;
+    permutationCount: number | null = null;
 
     @observable
-    comparisonCount: number = 0;
+    comparisonCount: number | null = null;
 
     @observable
-    message: string;
+    message: string | null = null;
 
     @observable
     highlightElements: ArrayElementHighlight[] = [];
 
-    private constructor(message: string) {
+    private constructor(message: string | null) {
         this.message = message;
     }
 
-    public static create(message: string): AlgorithmStep {
+    public static create(message: string | null): AlgorithmStep {
         return new AlgorithmStep(message);
     }
 
@@ -38,6 +35,7 @@ export class AlgorithmStep {
         algorithmStep.permutationCount = step.permutationCount;
         algorithmStep.listingLineIdent = step.listingLineIdent;
         algorithmStep.highlightElements = step.highlightElements;
+        algorithmStep.stepNumber = step.stepNumber;
         return algorithmStep;
     }
 
@@ -46,7 +44,7 @@ export class AlgorithmStep {
         return this;
     }
 
-    setPermutationCount(value: number): AlgorithmStep {
+    setPermutationCount(value: number ): AlgorithmStep {
         this.permutationCount = value;
         return this;
     }
@@ -63,6 +61,11 @@ export class AlgorithmStep {
 
     setHighlightElements(value: ArrayElementHighlight[]): AlgorithmStep {
         this.highlightElements = value;
+        return this;
+    }
+
+    setStepNumber(value: number): AlgorithmStep {
+        this.stepNumber = value;
         return this;
     }
 }

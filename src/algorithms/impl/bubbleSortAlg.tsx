@@ -12,37 +12,61 @@ export class BubbleSortAlg extends AbstractAlg {
         let array = this.arrayStore.elements;
         let count = array.length - 1;
 
-        let step = AlgorithmStep.create("Начало сортировки");
-        steps.push(step);
+        let stepNumber = 0;
+        let comparisonCount = 0;
+        let permutationCount = 0;
+
+
+        let step = AlgorithmStep.create(null)
+            .setStepNumber(stepNumber)
+            .setComparisonCount(comparisonCount)
+            .setPermutationCount(permutationCount);
+
+        steps.push(AlgorithmStep.create("Начало сортировки"));
+        steps.push(AlgorithmStep.create(null).setListingLineIdent("for1.start"));
 
         for (let i = 0; i < count; i++) {
+
+            steps.push(AlgorithmStep.create(null).setListingLineIdent("for2.start"));
             for (let j = 0; j < count - i; j++) {
                 step = AlgorithmStep.clone(step)
-                    .setMessage(`Сравнение элементов a[${i}]=${array[i].value} и a[${j}]=${array[j].value}`)
-                    .setComparisonCount(++step.comparisonCount)
-                    .setHighlightElements([ArrayElementHighlight.comparison(array[i]),
-                        ArrayElementHighlight.comparison(array[j])]);
+                    .setMessage(`Сравнение элементов a[${j}]=${array[j].value} и a[${j + 1}]=${array[j + 1].value}`)
+                    .setListingLineIdent("comparison")
+                    .setStepNumber(stepNumber++)
+                    .setComparisonCount(++comparisonCount)
+                    .setHighlightElements([ArrayElementHighlight.comparison(array[j]),
+                        ArrayElementHighlight.comparison(array[j + 1])]);
 
                 steps.push(step);
 
-                if (array[j] > array[j + 1]) {
+                if (array[j].value > array[j + 1].value) {
                     step = AlgorithmStep.clone(step)
-                        .setMessage(`Перестановка элементов a[${i}]=${array[i].value} и a[${j}]=${array[j].value}`)
-                        .setPermutationCount(++step.permutationCount)
+                        .setMessage(`Перестановка элементов a[${j}]=${array[j].value} и a[${j + 1}]=${array[j + 1].value}`)
+                        .setStepNumber(stepNumber++)
+                        .setPermutationCount(++permutationCount)
                         .setHighlightElements([ArrayElementHighlight.permutation(array[i]),
                             ArrayElementHighlight.permutation(array[j])]);
 
-                    steps.push(step);
+                    steps.push(AlgorithmStep.clone(step).setListingLineIdent("permutation.memorize"));
 
                     let max = array[j];
+
+                    steps.push(AlgorithmStep.clone(step).setListingLineIdent("permutation.swap1"));
+
                     array[j] = array[j + 1];
+
+                    steps.push(AlgorithmStep.clone(step).setListingLineIdent("permutation.swap2"));
+
                     array[j + 1] = max;
                 }
+
+                steps.push(AlgorithmStep.create(null).setListingLineIdent("for2.start"));
             }
+
+            steps.push(AlgorithmStep.create(null).setListingLineIdent("for1.start"));
         }
 
-        step = AlgorithmStep.create("Конец сортировки");
-        steps.push(step);
+        steps.push(AlgorithmStep.create("Конец сортировки"));
 
         this.viewState.steps = steps;
     }
