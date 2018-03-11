@@ -47,9 +47,9 @@ export class BubbleSortAlg extends AbstractAlg {
                         .setHighlightElements([ArrayElementHighlight.permutation(array[i]),
                             ArrayElementHighlight.permutation(array[j])]);
 
-                    steps.push(AlgorithmStep.clone(step).setListingLineIdent("permutation.memorize"));
+                    steps.push(AlgorithmStep.clone(step).setListingLineIdent("permutation.temp"));
 
-                    let max = array[j];
+                    let temp = array[j];
 
                     steps.push(AlgorithmStep.clone(step).setListingLineIdent("permutation.swap1"));
 
@@ -57,7 +57,7 @@ export class BubbleSortAlg extends AbstractAlg {
 
                     steps.push(AlgorithmStep.clone(step).setListingLineIdent("permutation.swap2"));
 
-                    array[j + 1] = max;
+                    array[j + 1] = temp;
                 }
 
                 steps.push(AlgorithmStep.create(null).setListingLineIdent("for2.start"));
