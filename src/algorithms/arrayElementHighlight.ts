@@ -2,7 +2,8 @@ import {ArrayElement} from "./arrayElement";
 
 export enum HighLightType {
     PERMUTATION,
-    COMPARISON
+    COMPARISON,
+    SELECT
 }
 
 export class ArrayElementHighlight {
@@ -15,5 +16,9 @@ export class ArrayElementHighlight {
 
     public static permutation(element: ArrayElement) {
         return new ArrayElementHighlight(element, HighLightType.PERMUTATION);
+    }
+
+    public static select(element: ArrayElement) {
+        return new ArrayElementHighlight(element, HighLightType.SELECT);
     }
 }
