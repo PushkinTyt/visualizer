@@ -7,7 +7,7 @@ export class ViewStateStore {
     stepId: string;
 
     @observable
-    currentStep: AlgorithmStep = new AlgorithmStep("Выберите алгоритм");
+    currentStep: AlgorithmStep = AlgorithmStep.create("Выберите алгоритм");
 
     @observable
     steps: AlgorithmStep[] = [];
@@ -17,10 +17,14 @@ export class ViewStateStore {
         return this.steps.indexOf(this.currentStep);
     }
 
-    @action
     next(): AlgorithmStep {
         let nextIndex = this.steps.indexOf(this.currentStep) + 1;
         return this.currentStep = this.steps[nextIndex];
+    }
+
+    back() {
+        let previousIndex = this.steps.indexOf(this.currentStep) - 1;
+        return this.currentStep = this.steps[previousIndex];
     }
 }
 

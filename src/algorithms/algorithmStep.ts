@@ -1,5 +1,6 @@
 import {observable} from "mobx";
 import {ArrayElement} from "./arrayElement";
+import {ArrayElementHighlight} from "./arrayElementHighlight";
 
 export enum Operations {
     FORWARD,
@@ -12,29 +13,56 @@ export class AlgorithmStep {
     listingLineIdent: string;
 
     @observable
-    permutationCount: number;
+    permutationCount: number = 0;
 
     @observable
-    comparisonCount: number;
-
-    @observable
-    operations: Operations[] = [Operations.BACK, Operations.FORWARD];
+    comparisonCount: number = 0;
 
     @observable
     message: string;
 
     @observable
-    highlightElements: ArrayElement[] = [];
+    highlightElements: ArrayElementHighlight[] = [];
 
-    constructor(message: string) {
+    private constructor(message: string) {
         this.message = message;
     }
 
-    isFacingEnd() {
-        this.operations = [Operations.BACK]
+    public static create(message: string): AlgorithmStep {
+        return new AlgorithmStep(message);
     }
 
-    isFacingStart() {
-        this.operations = [Operations.FORWARD]
+    public static clone(step: AlgorithmStep): AlgorithmStep {
+        let algorithmStep = new AlgorithmStep(step.message);
+        algorithmStep.comparisonCount = step.comparisonCount;
+        algorithmStep.permutationCount = step.permutationCount;
+        algorithmStep.listingLineIdent = step.listingLineIdent;
+        algorithmStep.highlightElements = step.highlightElements;
+        return algorithmStep;
+    }
+
+    setListingLineIdent(value: string): AlgorithmStep {
+        this.listingLineIdent = value;
+        return this;
+    }
+
+    setPermutationCount(value: number): AlgorithmStep {
+        this.permutationCount = value;
+        return this;
+    }
+
+    setComparisonCount(value: number): AlgorithmStep {
+        this.comparisonCount = value;
+        return this;
+    }
+
+    setMessage(value: string): AlgorithmStep {
+        this.message = value;
+        return this;
+    }
+
+    setHighlightElements(value: ArrayElementHighlight[]): AlgorithmStep {
+        this.highlightElements = value;
+        return this;
     }
 }

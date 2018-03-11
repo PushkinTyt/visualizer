@@ -23,6 +23,15 @@ export class Step extends React.Component<StepProps, {}> {
         }
     }
 
+    @autobind
+    back() {
+        let viewState = this.props.viewState;
+
+        if (viewState) {
+            viewState.back();
+        }
+    }
+
     render() {
         let viewState = this.props.viewState;
         let stepNumber = viewState && viewState.stepNumber + 1;
@@ -32,11 +41,12 @@ export class Step extends React.Component<StepProps, {}> {
         return (
             <div>
                 <span>
-                    {stepNumber}
+                   Номер шага: {stepNumber} <br/> {message}
                 </span>
-                <span>
-                    {message}
-                </span>
+                <br/>
+                <button onClick={this.back}>
+                    back
+                </button>
                 <button onClick={this.next}>
                     next
                 </button>
