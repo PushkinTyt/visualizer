@@ -4,6 +4,7 @@ import {Grid, Row, Col} from "react-bootstrap";
 import {FullDiv} from "../fullDiv";
 import {AlgorithmContolPanel} from "../algorithmContolPanel/algorithmContolPanel";
 import {AlgorithmMsg} from "../algorithmMsg/algorithmMsg";
+import {CodeListing} from "../codeListing/codeListing";
 
 export interface MainViewProps extends RouteComponentProps<{}> {
 }
@@ -20,6 +21,9 @@ export class MainView extends React.Component<MainViewProps, MainViewState> {
                     <Row>
                         <Col xs={12} sm={12} lg={12}>
                             <AlgorithmMsg/>
+                        </Col>
+                        <Col xs={12} sm={12} lg={12}>
+                            <CodeListing/>
                         </Col>
                         <Col xs={12} sm={12} lg={12}>
                             <AlgorithmContolPanel/>

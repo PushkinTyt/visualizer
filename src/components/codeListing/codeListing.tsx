@@ -5,7 +5,7 @@ import {ViewStateStore} from "../../stores/viewStateStore";
 import {inject, observer} from "mobx-react";
 import {AlgorithmChooserStore} from "../../stores/algorithmChooserStore";
 
-export interface AlgorithmMsgProps {
+export interface CodeListingProps {
     viewState?: ViewStateStore;
     algorithmChooser?: AlgorithmChooserStore;
 }
@@ -13,7 +13,7 @@ export interface AlgorithmMsgProps {
 @inject('viewState')
 @inject('algorithmChooser')
 @observer
-export class AlgorithmMsg extends Component<AlgorithmMsgProps, undefined> {
+export class CodeListing extends Component<CodeListingProps, undefined> {
 
     render() {
         let viewState = this.props.viewState;
@@ -23,23 +23,12 @@ export class AlgorithmMsg extends Component<AlgorithmMsgProps, undefined> {
         let algorithmName = alogrithm && alogrithm.getAlgName();
 
         let currentStep = viewState && viewState.currentStep;
-        let message = currentStep && currentStep.message;
         let listingLineIdent = currentStep && currentStep.listingLineIdent;
-        let permutationCount = currentStep && currentStep.permutationCount;
-        let comparisonCount = currentStep && currentStep.comparisonCount;
-        let stepNumber = currentStep != undefined && currentStep.stepNumber != undefined
-            && currentStep.stepNumber + 1;
 
         return (
             <div>
                 <Paper zDepth={2} style={{margin: 10, padding: 10}}>
-                    {algorithmName}
-                </Paper>
-                <Paper zDepth={2} style={{margin: 10, padding: 10}}>
-                    Номер шага: {stepNumber} <br/>
-                    Сравнений {comparisonCount} <br/>
-                    Перестановок {permutationCount}<br/> <br/>
-                    {message}
+                    Строчка листинга: {listingLineIdent}<br/>
                 </Paper>
             </div>
         );

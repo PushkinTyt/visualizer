@@ -17,17 +17,17 @@ export class BubbleSortAlg extends AbstractAlg {
         let permutationCount = 0;
 
 
-        let step = AlgorithmStep.create(null)
+        let step = AlgorithmStep.create("Начало сортировки")
             .setStepNumber(stepNumber)
             .setComparisonCount(comparisonCount)
             .setPermutationCount(permutationCount);
 
-        steps.push(AlgorithmStep.create("Начало сортировки"));
-        steps.push(AlgorithmStep.create(null).setListingLineIdent("for1.start"));
+        steps.push(step);
+        steps.push(AlgorithmStep.clone(step).setListingLineIdent("for1.start"));
 
         for (let i = 0; i < count; i++) {
 
-            steps.push(AlgorithmStep.create(null).setListingLineIdent("for2.start"));
+            steps.push(AlgorithmStep.clone(step).setListingLineIdent("for2.start"));
             for (let j = 0; j < count - i; j++) {
                 step = AlgorithmStep.clone(step)
                     .setMessage(`Сравнение элементов a[${j}]=${array[j].value} и a[${j + 1}]=${array[j + 1].value}`)
@@ -60,10 +60,10 @@ export class BubbleSortAlg extends AbstractAlg {
                     array[j + 1] = temp;
                 }
 
-                steps.push(AlgorithmStep.create(null).setListingLineIdent("for2.start"));
+                steps.push(AlgorithmStep.clone(step).setListingLineIdent("for2.start"));
             }
 
-            steps.push(AlgorithmStep.create(null).setListingLineIdent("for1.start"));
+            steps.push(AlgorithmStep.clone(step).setListingLineIdent("for1.start"));
         }
 
         steps.push(AlgorithmStep.create("Конец сортировки"));
