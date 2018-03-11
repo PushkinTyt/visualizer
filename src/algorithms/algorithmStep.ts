@@ -7,7 +7,7 @@ export class AlgorithmStep {
     stepNumber: number | null = null;
 
     @observable
-    listingLineIdent: string;
+    listingLineIdent: string | null = null;
 
     @observable
     permutationCount: number | null = null;
@@ -39,12 +39,12 @@ export class AlgorithmStep {
         return algorithmStep;
     }
 
-    setListingLineIdent(value: string): AlgorithmStep {
+    setListingLineIdent(value: string | null): AlgorithmStep {
         this.listingLineIdent = value;
         return this;
     }
 
-    setPermutationCount(value: number ): AlgorithmStep {
+    setPermutationCount(value: number): AlgorithmStep {
         this.permutationCount = value;
         return this;
     }

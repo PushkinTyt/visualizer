@@ -16,7 +16,6 @@ export class BubbleSortAlg extends AbstractAlg {
         let comparisonCount = 0;
         let permutationCount = 0;
 
-
         let step = AlgorithmStep.create("Начало сортировки")
             .setStepNumber(stepNumber)
             .setComparisonCount(comparisonCount)
@@ -66,7 +65,9 @@ export class BubbleSortAlg extends AbstractAlg {
             steps.push(AlgorithmStep.clone(step).setListingLineIdent("for1.start"));
         }
 
-        steps.push(AlgorithmStep.create("Конец сортировки"));
+        steps.push(AlgorithmStep.clone(step)
+            .setListingLineIdent(null)
+            .setMessage("Конец сортировки"));
 
         this.viewState.steps = steps;
     }
