@@ -10,7 +10,6 @@ export class BubbleSortAlg extends AbstractAlg {
     init(): void {
         let steps = [];
         let array = this.arrayStore.elements;
-        let count =  array.length;
 
         let stepNumber = 0;
         let comparisonCount = 0;
@@ -25,10 +24,10 @@ export class BubbleSortAlg extends AbstractAlg {
         steps.push(step);
         steps.push(AlgorithmStep.clone(step).setListingLineIdent("for1.start"));
 
-        for (let i = 0; i < count; i++) {
+        for (let i = 0; i < array.length - 1; i++) {
 
             steps.push(AlgorithmStep.clone(step).setListingLineIdent("for2.start"));
-            for (let j = 0; j < count - i; j++) {
+            for (let j = 0; j < array.length - i - 1; j++) {
                 step = AlgorithmStep.clone(step)
                     .setMessage(`Сравнение элементов a[${j}]=${array[j].value} и a[${j + 1}]=${array[j + 1].value}`)
                     .setListingLineIdent("comparison")
