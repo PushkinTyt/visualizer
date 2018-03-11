@@ -18,6 +18,14 @@ export class MainStoreProvider extends React.Component<{}, undefined> {
     componentWillMount() {
         const viewState = new ViewStateStore();
         const arrayStore = new ArrayStateStore();
+        const algorithmChooser = new AlgorithmChooserStore(viewState, arrayStore)
+
+        this.stores = {
+            algorithmChooser,
+            viewState,
+            arrayStore
+        }
+
         reaction(
             () => viewState.steps,
             steps => {
@@ -25,11 +33,14 @@ export class MainStoreProvider extends React.Component<{}, undefined> {
             }
         );
 
-        this.stores = {
-            algorithmChooser: new AlgorithmChooserStore(viewState, arrayStore),
-            viewState,
-            arrayStore
-        }
+        reaction(
+            () => arrayStore.elements,
+            () => {
+                if (algorithmChooser.algorithm) {
+                    algorithmChooser.algorithm.init();
+                }
+            }
+        );
     }
 
     render(): JSX.Element | null {

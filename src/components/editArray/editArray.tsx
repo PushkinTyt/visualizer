@@ -11,6 +11,8 @@ import {autobind} from "core-decorators";
 import {TouchTapEvent} from "material-ui";
 import MenuItem from "material-ui/MenuItem";
 import {RouteComponentProps} from "react-router";
+import FlatButton from "material-ui/FlatButton";
+import {ArrayView} from "../ArrayView/ArrayView";
 
 export interface EditArrayProps extends RouteComponentProps<{}> {
     arrayStore?: ArrayStateStore;
@@ -31,44 +33,72 @@ export class EditArray extends Component<EditArrayProps, undefined> {
     }
 
     @autobind
-    onSelectTemplate(event: TouchTapEvent, index: number, value: ArrayTemplate) {
+    onSelectTemplate(event: TouchTapEvent, index: number, value: string) {
         let arrayStore = this.props.arrayStore;
         if (arrayStore) {
             arrayStore.chooseTemplate(value)
         }
     }
 
+    showEditButton() {
+        let arrayStore = this.props.arrayStore;
+        if (!!arrayStore && !arrayStore.isCustom) {
+            return <FlatButton
+                style={{top: -20}}
+                label="Edit"
+                onTouchTap={this.setCustom}
+                primary={true}/>
+        } else {
+            return null
+        }
+    }
+
     @autobind
-    setEditTemplate() {
+    setCustom() {
         let arrayStore = this.props.arrayStore;
         if (arrayStore) {
-            arrayStore.custom = true
+            arrayStore.setElements(arrayStore.selectedTemplate.elements)
+        }
+    }
+
+    arrayView() {
+        let arrayStore = this.props.arrayStore;
+        if (arrayStore && arrayStore.isCustom) {
+            // return <ArrayEditor/>
+            return <ArrayView/>
+        } else {
+            return <ArrayView/>
         }
     }
 
     render() {
         let arrayStore = this.props.arrayStore;
         let selectedTemplate = arrayStore && arrayStore.selectedTemplate;
-        let templates = arrayStore && arrayStore.templates || [];
-        let templateName = selectedTemplate && selectedTemplate.templateName;
+        let ident = selectedTemplate && selectedTemplate.ident;
         return (
             <FullDiv>
                 <Grid>
                     <Row>
-                        <Col xs={12} sm={3} lg={3}>
+                        <Col xs={12}>
                             <Paper zDepth={2} style={{margin: 10, padding: 10}}>
                                 <SelectField
+                                    style={{marginRight: 10}}
                                     floatingLabelText="Выберите шаблон массива"
-                                    value={templateName}
+                                    value={ident}
                                     onChange={this.onSelectTemplate}>
                                     {this.items.map(template => <MenuItem
                                         primaryText={template.templateName}
-                                        value={template}/>)}
+                                        value={template.ident}/>)}
                                 </SelectField>
+                                {this.showEditButton()}
                             </Paper>
                         </Col>
-                        <Col xs={12} sm={9} lg={9}>
-                            {/*<ArrayView/>*/}
+                    </Row>
+                    <Row>
+                        <Col xs={12}>
+                            <Paper zDepth={2} style={{margin: 10, padding: 10}}>
+                                {this.arrayView()}
+                            </Paper>
                         </Col>
                     </Row>
                 </Grid>
