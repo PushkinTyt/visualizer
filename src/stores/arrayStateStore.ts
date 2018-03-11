@@ -1,12 +1,64 @@
 import {ArrayElement} from "../algorithms/arrayElement";
-import {observable} from "mobx";
+import {action, observable} from "mobx";
+import {getUnicString} from "../utils/utils";
+import {ISimpleTemplate, simplaeTemplates} from "../utils/templates";
+
+export interface ArrayTemplate {
+    elements: ArrayElement[]
+    templateName: string
+    ident: string
+}
 
 export class ArrayStateStore {
+
+    static convertSimpleTemplates(templates: ISimpleTemplate[]): ArrayTemplate[] {
+        return templates.map(template => {
+            return {
+                elements: template.elements.map(value => new ArrayElement(getUnicString(), value)),
+                templateName: template.templateName,
+                ident: getUnicString()
+            }
+        })
+    }
+
+    static clone(elements: ArrayElement[] = []): ArrayElement[] {
+        return elements.map(element => new ArrayElement(getUnicString(), element.value))
+    }
 
     @observable
     elements: ArrayElement[];
 
+    @observable
+    custom: boolean;
+
+    @observable
+    selectedTemplate: ArrayTemplate;
+
+    templates: ArrayTemplate[] = [];
+
     constructor() {
-        this.elements = [1, 2, 3, 4, 10, 6, 7, 8, 9, 5].map(value => new ArrayElement(value.toString(), value))
+        this.templates = ArrayStateStore.convertSimpleTemplates(simplaeTemplates);
+        this.elements = ArrayStateStore.clone(this.templates[0].elements)
+    }
+
+    @action
+    chooseTemplate(template: ArrayTemplate) {
+        this.custom = false;
+        this.selectedTemplate = template;
+        this.setElements(template.elements, false);
+    }
+
+    @action
+    setElements(elements: ArrayElement[], custom:boolean = true) {
+        this.elements = ArrayStateStore.clone(elements);
+
+        if (custom) {
+            this.custom = custom;
+            this.selectedTemplate = {
+                elements: this.elements,
+                ident: getUnicString(),
+                templateName: 'custom'
+            }
+        }
     }
 }
