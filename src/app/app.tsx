@@ -7,6 +7,9 @@ import darkBaseTheme from "material-ui/styles/baseThemes/darkBaseTheme";
 import getMuiTheme from "material-ui/styles/getMuiTheme";
 import AppBar from "material-ui/AppBar";
 import {FullDiv} from "../components/fullDiv";
+import {MainStoreProvider} from "../stores/mainStoreProvaider";
+import {Menu} from "../components/menu/menu";
+
 let PerfectScrollbar = require("react-perfect-scrollbar");
 
 export interface AppProps {
@@ -20,20 +23,23 @@ export class App extends Component<AppProps, AppState> {
     render() {
         return (
             <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
-                <FullDiv>
-                    <AppBar
-                        zDepth={2}
-                        showMenuIconButton={false}
-                        title="Visualizer"
-                    />
-                    <div className={mainClass}>
-                        <PerfectScrollbar>
-                            <div>
-                                <Routers/>
-                            </div>
-                        </PerfectScrollbar>
-                    </div>
-                </FullDiv>
+                <MainStoreProvider>
+                    <FullDiv>
+                        <AppBar
+                            zDepth={2}
+                            showMenuIconButton={false}
+                            title="Visualizer"
+                            iconElementRight={<Menu></Menu>}
+                        />
+                        <div className={mainClass}>
+                            <PerfectScrollbar>
+                                <div>
+                                    <Routers/>
+                                </div>
+                            </PerfectScrollbar>
+                        </div>
+                    </FullDiv>
+                </MainStoreProvider>
             </MuiThemeProvider>
         );
     }

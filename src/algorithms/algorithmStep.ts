@@ -2,11 +2,6 @@ import {observable} from "mobx";
 import {ArrayElement} from "./arrayElement";
 import {ArrayElementHighlight} from "./arrayElementHighlight";
 
-export enum Operations {
-    FORWARD,
-    BACK
-}
-
 export class AlgorithmStep {
 
     @observable

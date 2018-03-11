@@ -17,6 +17,11 @@ export class ViewStateStore {
         return this.steps.indexOf(this.currentStep);
     }
 
+    @computed
+    get stepsCount() {
+        return this.steps.length;
+    }
+
     next(): AlgorithmStep {
         let nextIndex = this.steps.indexOf(this.currentStep) + 1;
         return this.currentStep = this.steps[nextIndex];
