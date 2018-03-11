@@ -18,9 +18,9 @@ export class Menu extends Component<MenuProps, {}> {
                 }
                 targetOrigin={{horizontal: 'right', vertical: 'top'}}
                 anchorOrigin={{horizontal: 'right', vertical: 'top'}}>
-                <MenuItem primaryText="Refresh"/>
-                <MenuItem primaryText="Edit array"/>
-                <MenuItem primaryText="Change algorithm"/>
+                <MenuItem primaryText="Сбросить"/>
+                <MenuItem primaryText="Редактировать массив"/>
+                <MenuItem primaryText="Выбор алгоритма"/>
             </IconMenu>
         );
     }

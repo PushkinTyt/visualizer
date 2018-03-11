@@ -16,6 +16,8 @@ export abstract class AbstractAlg {
 
     abstract getViews(): AbstractView[];
 
+    abstract getAlgName(): string ;
+
     protected getSteps(): AlgorithmStep[] {
         return this.viewState.steps;
     }

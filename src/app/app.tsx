@@ -28,7 +28,7 @@ export class App extends Component<AppProps, AppState> {
                         <AppBar
                             zDepth={2}
                             showMenuIconButton={false}
-                            title="Visualizer"
+                            title="Визуализатор сортировок"
                             iconElementRight={<Menu></Menu>}
                         />
                         <div className={mainClass}>

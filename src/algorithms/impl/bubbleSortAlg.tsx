@@ -74,4 +74,8 @@ export class BubbleSortAlg extends AbstractAlg {
     getViews(): AbstractView[] {
         return [];
     }
+
+    getAlgName(): string {
+        return "Сортировка простыми обменами (пузырек)";
+    }
 }
