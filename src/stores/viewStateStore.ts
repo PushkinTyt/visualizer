@@ -31,5 +31,13 @@ export class ViewStateStore {
         let previousIndex = this.steps.indexOf(this.currentStep) - 1;
         return this.currentStep = this.steps[previousIndex];
     }
+
+    refresh() {
+        return this.currentStep = this.steps[0]
+    }
+
+    toEnd() {
+        return this.currentStep = this.steps[this.stepsCount - 1]
+    }
 }
 
