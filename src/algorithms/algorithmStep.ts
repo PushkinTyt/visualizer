@@ -1,5 +1,6 @@
 import {observable} from "mobx";
 import {ArrayElementHighlight} from "./arrayElementHighlight";
+import {ArrayElement} from "./arrayElement";
 
 export class AlgorithmStep {
 
@@ -17,6 +18,9 @@ export class AlgorithmStep {
 
     @observable
     message: string | null = null;
+
+    @observable.ref
+    array: ArrayElement[] = [];
 
     @observable
     highlightElements: ArrayElementHighlight[] = [];
@@ -36,6 +40,7 @@ export class AlgorithmStep {
         algorithmStep.listingLineIdent = step.listingLineIdent;
         algorithmStep.highlightElements = step.highlightElements;
         algorithmStep.stepNumber = step.stepNumber;
+        algorithmStep.array = ([] as ArrayElement[]).concat(step.array);
         return algorithmStep;
     }
 
@@ -66,6 +71,11 @@ export class AlgorithmStep {
 
     setStepNumber(value: number): AlgorithmStep {
         this.stepNumber = value;
+        return this;
+    }
+
+    setArray(array: ArrayElement[]) {
+        this.array = ([] as ArrayElement[]).concat(array);
         return this;
     }
 }

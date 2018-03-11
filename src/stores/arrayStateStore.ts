@@ -1,7 +1,9 @@
 import {ArrayElement} from "../algorithms/arrayElement";
-import {action, observable} from "mobx";
+import {action, computed, observable} from "mobx";
 import {getUnicString} from "../utils/utils";
-import {ISimpleTemplate, simplaeTemplates} from "../utils/templates";
+import {simplaeTemplates} from "../utils/templates";
+import {CustomTemplate} from "./models/customTemplate";
+import {Template} from "./models/template";
 
 export interface ArrayTemplate {
     elements: ArrayElement[]
@@ -11,54 +13,46 @@ export interface ArrayTemplate {
 
 export class ArrayStateStore {
 
-    static convertSimpleTemplates(templates: ISimpleTemplate[]): ArrayTemplate[] {
-        return templates.map(template => {
-            return {
-                elements: template.elements.map(value => new ArrayElement(getUnicString(), value)),
-                templateName: template.templateName,
-                ident: getUnicString()
-            }
-        })
-    }
-
-    static clone(elements: ArrayElement[] = []): ArrayElement[] {
+    static cloneElements(elements: ArrayElement[] = []): ArrayElement[] {
         return elements.map(element => new ArrayElement(getUnicString(), element.value))
     }
 
-    @observable
+    @observable.ref
     elements: ArrayElement[];
 
     @observable
-    custom: boolean;
-
-    @observable
-    selectedTemplate: ArrayTemplate;
+    selectedTemplateIdent: string;
 
     templates: ArrayTemplate[] = [];
 
+    private customTemplate:CustomTemplate = new CustomTemplate()
+
     constructor() {
-        this.templates = ArrayStateStore.convertSimpleTemplates(simplaeTemplates);
-        this.elements = ArrayStateStore.clone(this.templates[0].elements)
+        this.templates = simplaeTemplates.map(simTemp => new Template(simTemp));
+        this.templates.push(this.customTemplate);
+        this.chooseTemplate(this.templates[0].ident);
+    }
+
+    @computed
+    get selectedTemplate() {
+        let templates = this.templates.filter(template => template.ident === this.selectedTemplateIdent);
+        return templates[0]
+    }
+
+    @computed
+    get isCustom():boolean {
+        return this.selectedTemplate instanceof CustomTemplate
     }
 
     @action
-    chooseTemplate(template: ArrayTemplate) {
-        this.custom = false;
-        this.selectedTemplate = template;
-        this.setElements(template.elements, false);
+    chooseTemplate(templateIdent: string) {
+        this.selectedTemplateIdent = templateIdent;
+        this.elements = ArrayStateStore.cloneElements(this.selectedTemplate.elements);
     }
 
     @action
-    setElements(elements: ArrayElement[], custom:boolean = true) {
-        this.elements = ArrayStateStore.clone(elements);
-
-        if (custom) {
-            this.custom = custom;
-            this.selectedTemplate = {
-                elements: this.elements,
-                ident: getUnicString(),
-                templateName: 'custom'
-            }
-        }
+    setElements(elements: ArrayElement[]) {
+        this.elements = ArrayStateStore.cloneElements(elements);
+        this.selectedTemplateIdent = this.customTemplate.ident
     }
 }

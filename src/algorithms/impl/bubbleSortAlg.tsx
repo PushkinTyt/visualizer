@@ -18,6 +18,7 @@ export class BubbleSortAlg extends AbstractAlg {
 
         let step = AlgorithmStep.create("Начало сортировки")
             .setStepNumber(stepNumber)
+            .setArray(array)
             .setComparisonCount(comparisonCount)
             .setPermutationCount(permutationCount);
 
@@ -32,6 +33,7 @@ export class BubbleSortAlg extends AbstractAlg {
                     .setMessage(`Сравнение элементов a[${j}]=${array[j].value} и a[${j + 1}]=${array[j + 1].value}`)
                     .setListingLineIdent("comparison")
                     .setStepNumber(stepNumber++)
+                    .setArray(array)
                     .setComparisonCount(++comparisonCount)
                     .setHighlightElements([ArrayElementHighlight.comparison(array[j]),
                         ArrayElementHighlight.comparison(array[j + 1])]);
@@ -42,6 +44,7 @@ export class BubbleSortAlg extends AbstractAlg {
                     step = AlgorithmStep.clone(step)
                         .setMessage(`Перестановка элементов a[${j}]=${array[j].value} и a[${j + 1}]=${array[j + 1].value}`)
                         .setStepNumber(stepNumber++)
+                        .setArray(array)
                         .setPermutationCount(++permutationCount)
                         .setHighlightElements([ArrayElementHighlight.permutation(array[i]),
                             ArrayElementHighlight.permutation(array[j])]);
