@@ -1,7 +1,7 @@
-import {ArrayElement} from "../algorithms/ArrayElement";
+import {ArrayElement} from "../algorithms/arrayElement";
 import {observable} from "mobx";
 
-export class ArrayStore {
+export class ArrayStateStore {
 
     @observable
     elements: ArrayElement[];

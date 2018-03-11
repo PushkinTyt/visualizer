@@ -1,5 +1,5 @@
 import {action, computed, observable, reaction} from "mobx";
-import {AlgorithmStep} from "../algorithms/AlgorithmStep";
+import {AlgorithmStep} from "../algorithms/algorithmStep";
 
 export class ViewStateStore {
 

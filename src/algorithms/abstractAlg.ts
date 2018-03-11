@@ -1,11 +1,11 @@
 import {AbstractView} from "./abstractView";
 import {ViewStateStore} from "../stores/viewStateStore";
-import {ArrayStore} from "../stores/arrayStore";
+import {ArrayStateStore} from "../stores/arrayStateStore";
 
 export abstract class AbstractAlg {
     static id: string;
 
-    constructor(protected viewState: ViewStateStore, protected arrayStore: ArrayStore) {
+    constructor(protected viewState: ViewStateStore, protected arrayStore: ArrayStateStore) {
 
     }
 

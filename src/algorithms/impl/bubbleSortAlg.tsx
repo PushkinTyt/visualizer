@@ -1,10 +1,10 @@
 import {AbstractAlg} from "../abstractAlg";
 import {AbstractView} from "../abstractView";
-import {AlgorithmStep} from "../AlgorithmStep";
+import {AlgorithmStep} from "../algorithmStep";
 
 
-export class BubbleSort extends AbstractAlg {
-    static id = 'BubbleSort';
+export class BubbleSortAlg extends AbstractAlg {
+    static id = 'BubbleSortAlg';
 
     init(): void {
         let steps = [];

@@ -1,5 +1,5 @@
 import {observable} from "mobx";
-import {ArrayElement} from "./ArrayElement";
+import {ArrayElement} from "./arrayElement";
 
 export enum Operations {
     FORWARD,

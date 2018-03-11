@@ -2,13 +2,13 @@ import * as React from "react";
 import {Provider} from "mobx-react";
 import {AlgorithmChooserStore} from "./algorithmChooserStore";
 import {ViewStateStore} from "./viewStateStore";
-import {ArrayStore} from "./arrayStore";
+import {ArrayStateStore} from "./arrayStateStore";
 import {reaction} from "mobx";
 
 export interface MainStoreProviderStores {
     algorithmChooser: AlgorithmChooserStore;
     viewState: ViewStateStore;
-    arrayStore: ArrayStore;
+    arrayStore: ArrayStateStore;
 }
 
 export class MainStoreProvider extends React.Component<{}, undefined> {
@@ -17,7 +17,7 @@ export class MainStoreProvider extends React.Component<{}, undefined> {
 
     componentWillMount() {
         const viewState = new ViewStateStore();
-        const arrayStore = new ArrayStore();
+        const arrayStore = new ArrayStateStore();
         reaction(
             () => viewState.steps,
             steps => {
