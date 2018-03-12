@@ -14,12 +14,15 @@ import {RouteComponentProps} from "react-router";
 import FlatButton from "material-ui/FlatButton";
 import {ArrayView} from "../ArrayView/ArrayView";
 import {ArrayEditor} from "../ArrayEditor/ArrayEditor";
+import {AlgorithmChooserStore} from "../../stores/algorithmChooserStore";
 
 export interface EditArrayProps extends RouteComponentProps<{}> {
     arrayStore?: ArrayStateStore;
+    algorithmChooser?: AlgorithmChooserStore;
 }
 
 @inject('arrayStore')
+@inject('algorithmChooser')
 @observer
 export class EditArray extends Component<EditArrayProps, undefined> {
 
@@ -45,6 +48,7 @@ export class EditArray extends Component<EditArrayProps, undefined> {
         let arrayStore = this.props.arrayStore;
         if (!!arrayStore && !arrayStore.isCustom) {
             return <FlatButton
+                fullWidth={true}
                 style={{top: -20}}
                 label="Edit"
                 onTouchTap={this.setCustom}
@@ -59,6 +63,15 @@ export class EditArray extends Component<EditArrayProps, undefined> {
         let arrayStore = this.props.arrayStore;
         if (arrayStore) {
             arrayStore.setElements(arrayStore.selectedTemplate.elements)
+        }
+    }
+
+    @autobind
+    finishEditArray() {
+        let algorithmChooser = this.props.algorithmChooser;
+        let algorithm = algorithmChooser && algorithmChooser.algorithm;
+        if (algorithm) {
+            algorithm.init()
         }
     }
 
@@ -96,6 +109,12 @@ export class EditArray extends Component<EditArrayProps, undefined> {
                                     </div>
                                     <div style={{flex: '0 1', marginLeft: 15, marginTop: 35}}>
                                         {this.showEditButton()}
+                                        <FlatButton
+                                            fullWidth={true}
+                                            style={{top: -20}}
+                                            label="применить"
+                                            onTouchTap={this.finishEditArray}
+                                            primary={true}/>
                                     </div>
                                 </div>
                             </Paper>
