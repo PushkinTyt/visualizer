@@ -45,8 +45,8 @@ export class BubbleSortAlg extends AbstractAlg {
                         .setStepNumber(stepNumber++)
                         .setArray(array)
                         .setPermutationCount(++permutationCount)
-                        .setHighlightElements([ArrayElementHighlight.permutation(array[i]),
-                            ArrayElementHighlight.permutation(array[j])]);
+                        .setHighlightElements([ArrayElementHighlight.permutation(array[j]),
+                            ArrayElementHighlight.permutation(array[j + 1])]);
 
                     steps.push(AlgorithmStep.clone(step).setListingLineIdent("permutation.temp"));
 
