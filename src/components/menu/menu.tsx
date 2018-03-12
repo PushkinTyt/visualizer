@@ -4,6 +4,7 @@ import IconMenu from "material-ui/IconMenu";
 import IconButton from "material-ui/IconButton";
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import MenuItem from "material-ui/MenuItem";
+import history from "../../route/history";
 
 export interface MenuProps {
 
@@ -19,7 +20,7 @@ export class Menu extends Component<MenuProps, {}> {
                 targetOrigin={{horizontal: 'right', vertical: 'top'}}
                 anchorOrigin={{horizontal: 'right', vertical: 'top'}}>
                 <MenuItem primaryText="Сбросить"/>
-                <MenuItem primaryText="Редактировать массив"/>
+                <MenuItem primaryText="Редактировать массив" onClick={() => history.push('/editArray')}/>
                 <MenuItem primaryText="Выбор алгоритма"/>
             </IconMenu>
         );
