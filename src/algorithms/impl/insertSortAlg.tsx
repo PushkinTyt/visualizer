@@ -2,6 +2,7 @@ import {AbstractAlg} from "../abstractAlg";
 import {AbstractView} from "../abstractView";
 import {AlgorithmStep} from "../algorithmStep";
 import {ArrayElementHighlight, HighLightType} from "../arrayElementHighlight";
+import {ArrayElement} from "../arrayElement";
 
 export class InsertSortAlg extends AbstractAlg {
     static id = 'InsertSortAlg';
@@ -24,9 +25,30 @@ export class InsertSortAlg extends AbstractAlg {
         steps.push(step);
         steps.push(AlgorithmStep.clone(step).setListingLineIdent("for.start"));
 
-        for (let i = 0; i < count; i++) {
-            let v = array[i];
+        function addStep(steps: AlgorithmStep[], step: AlgorithmStep) {
+            steps.push(step);
+            return true;
+        }
 
+        function needToSwapElements(i: number, j: number, v: ArrayElement, step: AlgorithmStep, steps: AlgorithmStep[]) {
+            if (j < 0) {
+                return false;
+            }
+
+            step = AlgorithmStep.clone(step)
+                .setMessage(`Сравнение a[${j}]=${array[j].value} с v=a[${i}]=${v.value}`)
+                .setListingLineIdent("compare")
+                .setComparisonCount(++comparisonCount)
+                .setStepNumber(stepNumber++)
+                .setHighlightElements([ArrayElementHighlight.comparison(array[i]),
+                    ArrayElementHighlight.comparison(v)]);
+
+            steps.push(step);
+
+            return array[j].value > v.value;
+        }
+
+        for (let i = 0; i < count; i++) {
             step = AlgorithmStep.clone(step)
                 .setMessage(`Выбор элемента масива v=a[${i}]=${array[i].value}`)
                 .setListingLineIdent("selectElement")
@@ -35,45 +57,26 @@ export class InsertSortAlg extends AbstractAlg {
 
             steps.push(step);
 
+            let v = array[i];
             let j = i - 1;
-            if (j > 0) {
+
+            while (needToSwapElements(i, j, v, step, steps)) {
                 step = AlgorithmStep.clone(step)
-                    .setMessage(`Сравнение a[${j}]=${array[j].value} с v=a[${i}]=${v.value}`)
-                    .setListingLineIdent("compare")
-                    .setComparisonCount(++comparisonCount)
+                    .setMessage(`Перестановка a[${j}]=${array[j].value} с v=a[${i}]=${v.value}`)
+                    .setListingLineIdent("permutation")
+                    .setPermutationCount(++permutationCount)
                     .setStepNumber(stepNumber++)
-                    .setHighlightElements([ArrayElementHighlight.comparison(array[i]),
-                        ArrayElementHighlight.comparison(v)]);
+                    .setHighlightElements([ArrayElementHighlight.permutation(array[i]),
+                        ArrayElementHighlight.permutation(v)]);
 
                 steps.push(step);
 
-                while (j >= 0 && array[j].value > v.value) {
-                    step = AlgorithmStep.clone(step)
-                        .setMessage(`Перестановка a[${j}]=${array[j].value} с v=a[${i}]=${v.value}`)
-                        .setListingLineIdent("permutation")
-                        .setPermutationCount(++permutationCount)
-                        .setStepNumber(stepNumber++)
-                        .setHighlightElements([ArrayElementHighlight.permutation(array[i]),
-                            ArrayElementHighlight.permutation(v)]);
+                array[j + 1] = array[j];
 
-                    steps.push(step);
+                step = AlgorithmStep.clone(step).setArray(array).setHighlightElements([]).setListingLineIdent("changeCompareElement");
+                steps.push(step );
 
-                    array[j + 1] = array[j];
-
-                    steps.push(AlgorithmStep.clone(step).setListingLineIdent("changeCompareElement"));
-
-                    j--;
-
-                    step = AlgorithmStep.clone(step)
-                        .setMessage(`Сравнение a[${j}]=${array[j].value} с v=a[${i}]=${v.value}`)
-                        .setListingLineIdent("compare")
-                        .setComparisonCount(++comparisonCount)
-                        .setStepNumber(stepNumber++)
-                        .setHighlightElements([ArrayElementHighlight.comparison(array[i]),
-                            ArrayElementHighlight.comparison(v)]);
-
-                    steps.push(step);
-                }
+                j--;
             }
 
             step = AlgorithmStep.clone(step)
@@ -87,7 +90,8 @@ export class InsertSortAlg extends AbstractAlg {
 
             array[j + 1] = v;
 
-            steps.push(AlgorithmStep.clone(step).setListingLineIdent("for.start"));
+            step = AlgorithmStep.clone(step).setArray(array).setListingLineIdent("for.start");
+            steps.push(step);
         }
 
         steps.push(AlgorithmStep.clone(step)

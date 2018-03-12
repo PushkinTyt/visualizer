@@ -35,7 +35,7 @@ export class ArrayView extends Component<ArrayViewProps, undefined> {
             return (
                 <Chip style={{
                     margin: 4,
-                }} key={element.id}>
+                }}>
                     {element.value}
                 </Chip>
             );
