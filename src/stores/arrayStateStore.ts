@@ -17,6 +17,9 @@ export class ArrayStateStore {
         return elements.map(element => new ArrayElement(getUnicString(), element.value))
     }
 
+    @observable
+    changed: boolean = false;
+
     @observable.ref
     elements: ArrayElement[];
 
@@ -51,13 +54,15 @@ export class ArrayStateStore {
     @action
     chooseTemplate(templateIdent: string) {
         this.selectedTemplateIdent = templateIdent;
+        this.changed = true;
         this.elements = ArrayStateStore.cloneElements(this.selectedTemplate.elements);
     }
 
     @action
     setElements(elements: ArrayElement[]) {
         this.elements = ArrayStateStore.cloneElements(elements);
-        this.selectedTemplateIdent = this.customTemplate.ident
+        this.selectedTemplateIdent = this.customTemplate.ident;
+        this.changed = true;
     }
 
     @action

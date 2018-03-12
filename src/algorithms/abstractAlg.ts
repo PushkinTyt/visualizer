@@ -12,8 +12,13 @@ export abstract class AbstractAlg {
 
     }
 
+    public init(): void {
+        this.makeSteps()
+        this.arrayStore.changed = false;
+    }
+
     // инициализация шагов алгоритма
-    abstract init(): void;
+    abstract makeSteps(): void;
 
     abstract getViews(): AbstractView[];
 

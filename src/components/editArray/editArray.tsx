@@ -26,9 +26,6 @@ export interface EditArrayProps extends RouteComponentProps<{}> {
 @observer
 export class EditArray extends Component<EditArrayProps, undefined> {
 
-    @observable
-    changed: boolean = false;
-
     @computed
     get items(): ArrayTemplate[] {
         let arrayStore = this.props.arrayStore;
@@ -44,7 +41,6 @@ export class EditArray extends Component<EditArrayProps, undefined> {
         let arrayStore = this.props.arrayStore;
         if (arrayStore) {
             arrayStore.chooseTemplate(value)
-            this.changed = true
         }
     }
 
@@ -66,7 +62,6 @@ export class EditArray extends Component<EditArrayProps, undefined> {
         let arrayStore = this.props.arrayStore;
         if (arrayStore) {
             arrayStore.setElements(arrayStore.selectedTemplate.elements)
-            this.changed = true
         }
     }
 
@@ -76,7 +71,6 @@ export class EditArray extends Component<EditArrayProps, undefined> {
         let algorithm = algorithmChooser && algorithmChooser.algorithm;
         if (algorithm) {
             algorithm.init();
-            this.changed = false;
         }
     }
 
@@ -85,7 +79,6 @@ export class EditArray extends Component<EditArrayProps, undefined> {
         let arrayStore = this.props.arrayStore;
         if (arrayStore) {
             arrayStore.setElements(arrayStore.elements);
-            this.changed = true
         }
     }
 
@@ -103,6 +96,7 @@ export class EditArray extends Component<EditArrayProps, undefined> {
         let arrayStore = this.props.arrayStore;
         let selectedTemplate = arrayStore && arrayStore.selectedTemplate;
         let ident = selectedTemplate && selectedTemplate.ident;
+        let changed = arrayStore && arrayStore.changed || false;
         return (
             <FullDiv>
                 <Grid>
@@ -126,7 +120,7 @@ export class EditArray extends Component<EditArrayProps, undefined> {
                                     <div style={{flex: '0 1', marginLeft: 15, marginTop: 35}}>
                                         {this.showEditButton()}
                                         <FlatButton
-                                            disabled={!this.changed}
+                                            disabled={!changed}
                                             fullWidth={true}
                                             style={{top: -20}}
                                             label="применить"
