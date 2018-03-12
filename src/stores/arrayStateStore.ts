@@ -92,8 +92,9 @@ export class ArrayStateStore {
 
     @action
     swapAfter(element: ArrayElement) {
-        let index = this.elements.indexOf(element) + 1;
-        this.elements.splice(index, 0);
+        let index = this.elements.indexOf(element);
+        let element2 = this.elements[index + 1]
+        this.elements.splice(index, 2, element2, element);
         this.elements = this.getCloneElements();
     }
 }

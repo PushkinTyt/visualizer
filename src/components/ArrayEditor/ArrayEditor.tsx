@@ -119,6 +119,7 @@ export class ArrayEditor extends Component<ArrayEditorProps, undefined> {
                 </FloatingActionButton>
                 {(index !== (this.count - 1)) ?
                     <FloatingActionButton
+                        onTouchTap={() => this.swapAfter(element)}
                         className={'array-element--before-button'}
                         mini={true}>
                         <SwapIcon/>
@@ -164,6 +165,14 @@ export class ArrayEditor extends Component<ArrayEditorProps, undefined> {
         let arrayStore = this.props.arrayStore;
         if (arrayStore) {
             arrayStore.addAfter(element, this.makeEmptyElement())
+        }
+    }
+
+    @autobind
+    swapAfter(element: ArrayElement) {
+        let arrayStore = this.props.arrayStore;
+        if (arrayStore) {
+            arrayStore.swapAfter(element)
         }
     }
 
