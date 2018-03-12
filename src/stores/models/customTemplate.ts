@@ -8,6 +8,6 @@ export class CustomTemplate extends Template {
     ident: string = customTemplateIdent;
 
     constructor() {
-        super({templateName: 'Custom', elements: []})
+        super({templateName: 'Пользовательский', elements: []})
     }
 }
