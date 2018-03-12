@@ -140,7 +140,8 @@ export class ArrayEditor extends Component<ArrayEditorProps, undefined> {
     createFirstElement() {
         let arrayStore = this.props.arrayStore;
         if (arrayStore) {
-            arrayStore.add(this.makeEmptyElement(), 0)
+            arrayStore.add(this.makeEmptyElement(), 0);
+            this.props.onChangeElement();
         }
     }
 
@@ -148,7 +149,8 @@ export class ArrayEditor extends Component<ArrayEditorProps, undefined> {
     delete(element: ArrayElement) {
         let arrayStore = this.props.arrayStore;
         if (arrayStore) {
-            arrayStore.delete(element)
+            arrayStore.delete(element);
+            this.props.onChangeElement();
         }
     }
 
@@ -156,7 +158,8 @@ export class ArrayEditor extends Component<ArrayEditorProps, undefined> {
     addBefore(element: ArrayElement) {
         let arrayStore = this.props.arrayStore;
         if (arrayStore) {
-            arrayStore.addBefore(element, this.makeEmptyElement())
+            arrayStore.addBefore(element, this.makeEmptyElement());
+            this.props.onChangeElement();
         }
     }
 
@@ -164,7 +167,8 @@ export class ArrayEditor extends Component<ArrayEditorProps, undefined> {
     addAfter(element: ArrayElement) {
         let arrayStore = this.props.arrayStore;
         if (arrayStore) {
-            arrayStore.addAfter(element, this.makeEmptyElement())
+            arrayStore.addAfter(element, this.makeEmptyElement());
+            this.props.onChangeElement();
         }
     }
 
@@ -172,7 +176,8 @@ export class ArrayEditor extends Component<ArrayEditorProps, undefined> {
     swapAfter(element: ArrayElement) {
         let arrayStore = this.props.arrayStore;
         if (arrayStore) {
-            arrayStore.swapAfter(element)
+            arrayStore.swapAfter(element);
+            this.props.onChangeElement();
         }
     }
 

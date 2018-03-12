@@ -6,7 +6,7 @@ import {ArrayElementHighlight, HighLightType} from "../arrayElementHighlight";
 export class InsertSortAlg extends AbstractAlg {
     static id = 'InsertSortAlg';
 
-    init(): void {
+    makeSteps(): void {
         let steps = [];
         let array = this.arrayStore.getCloneElements();
         let count = array.length;

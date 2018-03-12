@@ -7,7 +7,7 @@ import {ArrayElementHighlight, HighLightType} from "../arrayElementHighlight";
 export class BubbleSortAlg extends AbstractAlg {
     static id = 'BubbleSortAlg';
 
-    init(): void {
+    makeSteps(): void {
         let steps = [];
         let array = this.arrayStore.getCloneElements();
 
