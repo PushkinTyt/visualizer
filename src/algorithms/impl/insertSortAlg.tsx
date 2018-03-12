@@ -8,7 +8,7 @@ export class InsertSortAlg extends AbstractAlg {
 
     init(): void {
         let steps = [];
-        let array = this.arrayStore.elements;
+        let array = this.arrayStore.getCloneElements();
         let count = array.length;
 
         let stepNumber = 0;
@@ -17,6 +17,7 @@ export class InsertSortAlg extends AbstractAlg {
 
         let step = AlgorithmStep.create("Начало сортировки")
             .setStepNumber(stepNumber)
+            .setArray(array)
             .setComparisonCount(comparisonCount)
             .setPermutationCount(permutationCount);
 
@@ -91,6 +92,7 @@ export class InsertSortAlg extends AbstractAlg {
 
         steps.push(AlgorithmStep.clone(step)
             .setListingLineIdent(null)
+            .setArray(array)
             .setMessage("Конец сортировки"));
 
         this.viewState.steps = steps;

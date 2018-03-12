@@ -33,9 +33,6 @@ export class AlgorithmMsg extends Component<AlgorithmMsgProps, undefined> {
         return (
             <div>
                 <Paper zDepth={2} style={{margin: 10, padding: 10}}>
-                    {algorithmName}
-                </Paper>
-                <Paper zDepth={2} style={{margin: 10, padding: 10}}>
                     Номер шага: {stepNumber} <br/>
                     Сравнений {comparisonCount} <br/>
                     Перестановок {permutationCount}<br/> <br/>

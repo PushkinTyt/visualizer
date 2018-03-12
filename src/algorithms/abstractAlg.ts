@@ -5,7 +5,7 @@ import {AlgorithmStep} from "./algorithmStep";
 import {ArrayElement} from "./arrayElement";
 
 export abstract class AbstractAlg {
-    static id: string;
+    public id: string;
 
     constructor(protected viewState: ViewStateStore, protected arrayStore: ArrayStateStore) {
 

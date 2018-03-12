@@ -3,7 +3,7 @@ import {observable, ObservableMap} from "mobx";
 import {ViewStateStore} from "./viewStateStore";
 import {BubbleSortAlg} from "../algorithms/impl/bubbleSortAlg";
 import {ArrayStateStore} from "./arrayStateStore";
-
+import {InsertSortAlg} from "../algorithms/impl/insertSortAlg";
 
 export class AlgorithmChooserStore {
 
@@ -13,9 +13,9 @@ export class AlgorithmChooserStore {
     algorithms: ObservableMap<AbstractAlg> = new ObservableMap<AbstractAlg>();
 
     constructor(private viewState: ViewStateStore, private arrayStore: ArrayStateStore) {
-        let bubbleSort = new BubbleSortAlg(viewState, arrayStore);
-        this.algorithms.set(BubbleSortAlg.id, bubbleSort);
-        this.choose(bubbleSort)
+        this.algorithms.set(BubbleSortAlg.id, new BubbleSortAlg(viewState, arrayStore));
+        this.algorithms.set(InsertSortAlg.id, new InsertSortAlg(viewState, arrayStore));
+        this.choose(this.algorithms.values()[0]);
     }
 
     choose(alg: AbstractAlg) {

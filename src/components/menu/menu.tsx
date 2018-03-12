@@ -19,9 +19,7 @@ export class Menu extends Component<MenuProps, {}> {
                 }
                 targetOrigin={{horizontal: 'right', vertical: 'top'}}
                 anchorOrigin={{horizontal: 'right', vertical: 'top'}}>
-                <MenuItem primaryText="Сбросить"/>
                 <MenuItem primaryText="Редактировать массив" onClick={() => history.push('/editArray')}/>
-                <MenuItem primaryText="Выбор алгоритма"/>
             </IconMenu>
         );
     }
