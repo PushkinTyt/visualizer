@@ -72,6 +72,7 @@ export class BubbleSortAlg extends AbstractAlg {
             .setMessage("Конец сортировки"));
 
         this.viewState.steps = steps;
+        this.viewState.currentStep = steps[0];
     }
 
     getViews(): AbstractView[] {
