@@ -5,7 +5,7 @@ import {Grid, Row, Col} from "react-bootstrap";
 import {inject, observer} from "mobx-react";
 import {ArrayStateStore, ArrayTemplate} from "../../stores/arrayStateStore";
 import {FullDiv} from "../fullDiv";
-import {computed} from "mobx";
+import {computed, observable} from "mobx";
 import SelectField from "material-ui/SelectField";
 import {autobind} from "core-decorators";
 import {TouchTapEvent} from "material-ui";
@@ -26,6 +26,9 @@ export interface EditArrayProps extends RouteComponentProps<{}> {
 @observer
 export class EditArray extends Component<EditArrayProps, undefined> {
 
+    @observable
+    changed: boolean = false;
+
     @computed
     get items(): ArrayTemplate[] {
         let arrayStore = this.props.arrayStore;
@@ -41,6 +44,7 @@ export class EditArray extends Component<EditArrayProps, undefined> {
         let arrayStore = this.props.arrayStore;
         if (arrayStore) {
             arrayStore.chooseTemplate(value)
+            this.changed = true
         }
     }
 
@@ -51,8 +55,7 @@ export class EditArray extends Component<EditArrayProps, undefined> {
                 fullWidth={true}
                 style={{top: -20}}
                 label="Edit"
-                onTouchTap={this.setCustom}
-                primary={true}/>
+                onTouchTap={this.setCustom}/>
         } else {
             return null
         }
@@ -63,6 +66,7 @@ export class EditArray extends Component<EditArrayProps, undefined> {
         let arrayStore = this.props.arrayStore;
         if (arrayStore) {
             arrayStore.setElements(arrayStore.selectedTemplate.elements)
+            this.changed = true
         }
     }
 
@@ -103,6 +107,7 @@ export class EditArray extends Component<EditArrayProps, undefined> {
                                             value={ident}
                                             onChange={this.onSelectTemplate}>
                                             {this.items.map(template => <MenuItem
+                                                key={template.ident}
                                                 primaryText={template.templateName}
                                                 value={template.ident}/>)}
                                         </SelectField>
@@ -110,11 +115,12 @@ export class EditArray extends Component<EditArrayProps, undefined> {
                                     <div style={{flex: '0 1', marginLeft: 15, marginTop: 35}}>
                                         {this.showEditButton()}
                                         <FlatButton
+                                            disabled={!this.changed}
                                             fullWidth={true}
                                             style={{top: -20}}
                                             label="применить"
-                                            onTouchTap={this.finishEditArray}
-                                            primary={true}/>
+                                            secondary={true}
+                                            onTouchTap={this.finishEditArray}/>
                                     </div>
                                 </div>
                             </Paper>
