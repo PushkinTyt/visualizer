@@ -61,7 +61,8 @@ export class BubbleSortAlg extends AbstractAlg {
                     array[j + 1] = temp;
                 }
 
-                steps.push(AlgorithmStep.clone(step).setListingLineIdent("for2.start"));
+                step = AlgorithmStep.clone(step).setArray(array).setListingLineIdent("for2.start");
+                steps.push(step);
             }
 
             steps.push(AlgorithmStep.clone(step).setListingLineIdent("for1.start"));
@@ -69,6 +70,7 @@ export class BubbleSortAlg extends AbstractAlg {
 
         steps.push(AlgorithmStep.clone(step)
             .setListingLineIdent(null)
+            .setArray(array)
             .setMessage("Конец сортировки"));
 
         this.viewState.steps = steps;
