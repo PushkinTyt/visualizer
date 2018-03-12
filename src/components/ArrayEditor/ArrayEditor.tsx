@@ -12,11 +12,12 @@ import {FullDiv} from "../fullDiv";
 import FloatingActionButton from "material-ui/FloatingActionButton";
 import {ArrayStateStore} from "../../stores/arrayStateStore";
 import './ArrayEditor.less'
-import {autobind} from "core-decorators";
-import {getUnicString} from "../../utils/utils";
+import {autobind, debounce} from "core-decorators";
+import {getUnicNumber, getUnicString} from "../../utils/utils";
 
 export interface ArrayEditorProps {
     arrayStore?: ArrayStateStore;
+    onChangeElement: () => void
 }
 
 @inject('arrayStore')
@@ -47,8 +48,19 @@ export class ArrayEditor extends Component<ArrayEditorProps, undefined> {
     }
 
     @autobind
-    onChangeValue(element:ArrayElement, value:number    ) {
-        element.value = value
+    @debounce(1000)
+    onChangeValue(element: ArrayElement, inputValue: string|number) {
+        let value: number;
+        if (typeof inputValue === "string") {
+            value = parseInt(inputValue);
+        } else {
+            value = inputValue;
+        }
+        if (isNaN(value)) {
+            value = 0
+        }
+        element.value = value;
+        this.props.onChangeElement()
     }
 
     elementEditor(element: ArrayElement, index: number) {
@@ -59,7 +71,10 @@ export class ArrayEditor extends Component<ArrayEditorProps, undefined> {
                     <div className={'array-element-input'}>
                         <TextField floatingLabelText={`a[${index}]`}
                                    fullWidth={true}
-                                   value={element.value}
+                                   key={element.id}
+                                   type="number"
+                                   onChange={(event, value) => this.onChangeValue(element, value)}
+                                   defaultValue={element.value}
                                    underlineShow={true}/>
                     </div>
                     <div className={'array-element-buttons'}>
@@ -107,6 +122,14 @@ export class ArrayEditor extends Component<ArrayEditorProps, undefined> {
                     </FloatingActionButton> : null}
             </FullDiv>
         );
+    }
+
+    makeEmptyElement(): ArrayElement {
+        let unicNumber = getUnicNumber();
+        return {
+            id: `id_${unicNumber}`,
+            value: unicNumber
+        }
     }
 
     render() {
