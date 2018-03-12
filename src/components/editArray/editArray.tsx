@@ -54,7 +54,7 @@ export class EditArray extends Component<EditArrayProps, undefined> {
             return <FlatButton
                 fullWidth={true}
                 style={{top: -20}}
-                label="Edit"
+                label="Редактировать"
                 onTouchTap={this.setCustom}/>
         } else {
             return null
@@ -75,14 +75,25 @@ export class EditArray extends Component<EditArrayProps, undefined> {
         let algorithmChooser = this.props.algorithmChooser;
         let algorithm = algorithmChooser && algorithmChooser.algorithm;
         if (algorithm) {
-            algorithm.init()
+            algorithm.init();
+            this.changed = false;
+        }
+    }
+
+    @autobind
+    onChangeElement() {
+        let arrayStore = this.props.arrayStore;
+        if (arrayStore) {
+            arrayStore.setElements(arrayStore.elements);
+            this.changed = true
         }
     }
 
     arrayView() {
         let arrayStore = this.props.arrayStore;
         if (arrayStore && arrayStore.isCustom) {
-            return <ArrayEditor/>
+            return <ArrayEditor
+                    onChangeElement={this.onChangeElement}/>
         } else {
             return <ArrayView/>
         }
