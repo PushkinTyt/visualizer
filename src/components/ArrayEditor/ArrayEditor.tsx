@@ -130,9 +130,10 @@ export class ArrayEditor extends Component<ArrayEditorProps, undefined> {
 
     makeEmptyElement(): ArrayElement {
         let unicNumber = getUnicNumber();
+        let value = Math.floor(Math.random() * (100)) - 50;
         return {
             id: `id_${unicNumber}`,
-            value: unicNumber
+            value: value
         }
     }
 

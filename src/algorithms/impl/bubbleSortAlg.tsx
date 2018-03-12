@@ -74,6 +74,7 @@ export class BubbleSortAlg extends AbstractAlg {
 
         steps.push(AlgorithmStep.clone(step)
             .setListingLineIdent(null)
+            .setHighlightElements([])
             .setArray(array)
             .setMessage("Конец сортировки"));
 

@@ -25,11 +25,6 @@ export class InsertSortAlg extends AbstractAlg {
         steps.push(step);
         steps.push(AlgorithmStep.clone(step).setListingLineIdent("for.start"));
 
-        function addStep(steps: AlgorithmStep[], step: AlgorithmStep) {
-            steps.push(step);
-            return true;
-        }
-
         function needToSwapElements(i: number, j: number, v: ArrayElement, step: AlgorithmStep, steps: AlgorithmStep[]) {
             if (j < 0) {
                 return false;
@@ -40,7 +35,7 @@ export class InsertSortAlg extends AbstractAlg {
                 .setListingLineIdent("compare")
                 .setComparisonCount(++comparisonCount)
                 .setStepNumber(stepNumber++)
-                .setHighlightElements([ArrayElementHighlight.comparison(array[i]),
+                .setHighlightElements([ArrayElementHighlight.comparison(array[j]),
                     ArrayElementHighlight.comparison(v)]);
 
             steps.push(step);
@@ -51,6 +46,7 @@ export class InsertSortAlg extends AbstractAlg {
         for (let i = 0; i < count; i++) {
             step = AlgorithmStep.clone(step)
                 .setMessage(`Выбор элемента масива v=a[${i}]=${array[i].value}`)
+                .setArray(array)
                 .setListingLineIdent("selectElement")
                 .setStepNumber(stepNumber++)
                 .setHighlightElements([ArrayElementHighlight.comparison(array[i])]);
@@ -61,27 +57,14 @@ export class InsertSortAlg extends AbstractAlg {
             let j = i - 1;
 
             while (needToSwapElements(i, j, v, step, steps)) {
-                step = AlgorithmStep.clone(step)
-                    .setMessage(`Перестановка a[${j}]=${array[j].value} с v=a[${i}]=${v.value}`)
-                    .setListingLineIdent("permutation")
-                    .setPermutationCount(++permutationCount)
-                    .setStepNumber(stepNumber++)
-                    .setHighlightElements([ArrayElementHighlight.permutation(array[i]),
-                        ArrayElementHighlight.permutation(v)]);
-
-                steps.push(step);
-
                 array[j + 1] = array[j];
-
-                step = AlgorithmStep.clone(step).setArray(array).setHighlightElements([]).setListingLineIdent("changeCompareElement");
-                steps.push(step );
-
                 j--;
             }
 
             step = AlgorithmStep.clone(step)
                 .setMessage(`Перемещаем элемент v=a[${i}]=${v.value} на ${j + 1} место`)
                 .setListingLineIdent("setPlace")
+                .setPermutationCount(++permutationCount)
                 .setStepNumber(stepNumber++)
                 .setHighlightElements([ArrayElementHighlight.permutation(array[j + 1]),
                     ArrayElementHighlight.permutation(v)]);
@@ -89,13 +72,13 @@ export class InsertSortAlg extends AbstractAlg {
             steps.push(step);
 
             array[j + 1] = v;
-
-            step = AlgorithmStep.clone(step).setArray(array).setListingLineIdent("for.start");
-            steps.push(step);
         }
 
         steps.push(AlgorithmStep.clone(step)
             .setListingLineIdent(null)
+            .setHighlightElements([])
+            .setComparisonCount(comparisonCount)
+            .setPermutationCount(permutationCount)
             .setArray(array)
             .setMessage("Конец сортировки"));
 
