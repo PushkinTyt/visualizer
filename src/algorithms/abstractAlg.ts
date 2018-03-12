@@ -3,9 +3,10 @@ import {ViewStateStore} from "../stores/viewStateStore";
 import {ArrayStateStore} from "../stores/arrayStateStore";
 import {AlgorithmStep} from "./algorithmStep";
 import {ArrayElement} from "./arrayElement";
+import {getUnicString} from "../utils/utils";
 
 export abstract class AbstractAlg {
-    public id: string;
+    public id: string = getUnicString()
 
     constructor(protected viewState: ViewStateStore, protected arrayStore: ArrayStateStore) {
 
