@@ -11,6 +11,7 @@ import {MainStoreProvider} from "../stores/mainStoreProvaider";
 import {Menu} from "../components/menu/menu";
 import history from "../route/history";
 import {Route, Router} from "react-router";
+import {BackButton} from "../components/menu/backButton";
 
 let PerfectScrollbar = require("react-perfect-scrollbar");
 
@@ -37,7 +38,7 @@ export class App extends Component<AppProps, AppState> {
                             }
                             iconElementLeft={
                                 <Router history={history}>
-                                    <Route exact path="/editArray" component={Menu}/>
+                                    <Route exact path="/editArray" component={BackButton}/>
                                 </Router>
                             }
                         />
