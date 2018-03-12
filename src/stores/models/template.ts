@@ -8,11 +8,11 @@ export class Template {
 
     templateName: string;
 
-    ident: string = getUnicString()
+    ident: string = getUnicString();
 
     constructor(simpleTemplate: ISimpleTemplate) {
-        this.templateName = simpleTemplate.templateName
-        this.elements = this.clone(simpleTemplate.elements.map(value => new ArrayElement(getUnicString(), value.toString())))
+        this.templateName = simpleTemplate.templateName;
+        this.elements = this.clone(simpleTemplate.elements.map(value => new ArrayElement(getUnicString(), parseInt(value.toString()))))
     }
 
     clone(elements: ArrayElement[] = []): ArrayElement[] {
