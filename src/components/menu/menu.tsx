@@ -5,8 +5,9 @@ import IconButton from "material-ui/IconButton";
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import MenuItem from "material-ui/MenuItem";
 import history from "../../route/history";
+import {RouteComponentProps} from "react-router";
 
-export interface MenuProps {
+export interface MenuProps extends RouteComponentProps<{}> {
 
 }
 

@@ -9,6 +9,8 @@ import AppBar from "material-ui/AppBar";
 import {FullDiv} from "../components/fullDiv";
 import {MainStoreProvider} from "../stores/mainStoreProvaider";
 import {Menu} from "../components/menu/menu";
+import history from "../route/history";
+import {Route, Router} from "react-router";
 
 let PerfectScrollbar = require("react-perfect-scrollbar");
 
@@ -27,9 +29,17 @@ export class App extends Component<AppProps, AppState> {
                     <FullDiv>
                         <AppBar
                             zDepth={2}
-                            showMenuIconButton={false}
                             title="Визуализатор сортировок"
-                            iconElementRight={<Menu></Menu>}
+                            iconElementRight={
+                                <Router history={history}>
+                                    <Route exact path="/" component={Menu}/>
+                                </Router>
+                            }
+                            iconElementLeft={
+                                <Router history={history}>
+                                    <Route exact path="/editArray" component={Menu}/>
+                                </Router>
+                            }
                         />
                         <div className={mainClass}>
                             <PerfectScrollbar>

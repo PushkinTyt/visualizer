@@ -49,7 +49,7 @@ export class ArrayEditor extends Component<ArrayEditorProps, undefined> {
 
     @autobind
     @debounce(1000)
-    onChangeValue(element: ArrayElement, inputValue: string|number) {
+    onChangeValue(element: ArrayElement, inputValue: string | number) {
         let value: number;
         if (typeof inputValue === "string") {
             value = parseInt(inputValue);
@@ -79,6 +79,7 @@ export class ArrayEditor extends Component<ArrayEditorProps, undefined> {
                     </div>
                     <div className={'array-element-buttons'}>
                         <FloatingActionButton
+                            onTouchTap={() => this.delete(element)}
                             className={'array-element-buttons--button'}
                             mini={true}>
                             <DeleteIcon/>
@@ -98,6 +99,7 @@ export class ArrayEditor extends Component<ArrayEditorProps, undefined> {
         return (
             <FullDiv className={'array-element--before'}>
                 <FloatingActionButton
+                    onTouchTap={() => this.addBefore(element)}
                     className={'array-element--before-button'}
                     mini={true}>
                     <AddIcon/>
@@ -110,6 +112,7 @@ export class ArrayEditor extends Component<ArrayEditorProps, undefined> {
         return (
             <FullDiv className={'array-element--after'}>
                 <FloatingActionButton
+                    onTouchTap={() => this.addAfter(element)}
                     className={'array-element--before-button'}
                     mini={true}>
                     <AddIcon/>
@@ -132,18 +135,53 @@ export class ArrayEditor extends Component<ArrayEditorProps, undefined> {
         }
     }
 
+    @autobind
+    createFirstElement() {
+        let arrayStore = this.props.arrayStore;
+        if (arrayStore) {
+            arrayStore.add(this.makeEmptyElement(), 0)
+        }
+    }
+
+    @autobind
+    delete(element: ArrayElement) {
+        let arrayStore = this.props.arrayStore;
+        if (arrayStore) {
+            arrayStore.delete(element)
+        }
+    }
+
+    @autobind
+    addBefore(element: ArrayElement) {
+        let arrayStore = this.props.arrayStore;
+        if (arrayStore) {
+            arrayStore.addBefore(element, this.makeEmptyElement())
+        }
+    }
+
+    @autobind
+    addAfter(element: ArrayElement) {
+        let arrayStore = this.props.arrayStore;
+        if (arrayStore) {
+            arrayStore.addAfter(element, this.makeEmptyElement())
+        }
+    }
+
     render() {
         if (!this.count) {
             return (
-                <Grid className={'array-editor'}>
-                    <FullDiv className={'array-element--before'}>
-                        <FloatingActionButton
-                            className={'array-element--before-button'}
-                            mini={true}>
-                            <AddIcon/>
-                        </FloatingActionButton>
-                    </FullDiv>
-                </Grid>
+                <FullDiv>
+                    <Grid className={'array-editor'}>
+                        <FullDiv className={'array-element--before'}>
+                            <FloatingActionButton
+                                onTouchTap={this.createFirstElement}
+                                className={'array-element--before-button'}
+                                mini={true}>
+                                <AddIcon/>
+                            </FloatingActionButton>
+                        </FullDiv>
+                    </Grid>
+                </FullDiv>
             );
         }
 

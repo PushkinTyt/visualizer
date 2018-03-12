@@ -25,7 +25,7 @@ export class ArrayStateStore {
 
     templates: ArrayTemplate[] = [];
 
-    private customTemplate:CustomTemplate = new CustomTemplate()
+    private customTemplate: CustomTemplate = new CustomTemplate()
 
     constructor() {
         this.templates = simplaeTemplates.map(simTemp => new Template(simTemp));
@@ -33,7 +33,7 @@ export class ArrayStateStore {
         this.chooseTemplate(this.templates[0].ident);
     }
 
-    getCloneElements():ArrayElement[] {
+    getCloneElements(): ArrayElement[] {
         return ([] as ArrayElement[]).concat(this.elements)
     }
 
@@ -44,7 +44,7 @@ export class ArrayStateStore {
     }
 
     @computed
-    get isCustom():boolean {
+    get isCustom(): boolean {
         return this.selectedTemplate instanceof CustomTemplate
     }
 
@@ -58,5 +58,42 @@ export class ArrayStateStore {
     setElements(elements: ArrayElement[]) {
         this.elements = ArrayStateStore.cloneElements(elements);
         this.selectedTemplateIdent = this.customTemplate.ident
+    }
+
+    @action
+    add(element: ArrayElement, index: number) {
+        this.elements.splice(index, 0, element);
+        this.elements = this.getCloneElements();
+    }
+
+    @action
+    delete(element: ArrayElement) {
+        let index = this.elements.indexOf(element);
+        if (~index) {
+            this.elements.splice(index, 1);
+            this.elements = this.getCloneElements();
+        }
+    }
+
+    @action
+    addBefore(element: ArrayElement, element2: ArrayElement) {
+        let index = this.elements.indexOf(element);
+        index = index <= 0 ? 0 : index - 1;
+        this.elements.splice(index, 0, element2);
+        this.elements = this.getCloneElements();
+    }
+
+    @action
+    addAfter(element: ArrayElement, element2: ArrayElement) {
+        let index = this.elements.indexOf(element) + 1;
+        this.elements.splice(index, 0, element2);
+        this.elements = this.getCloneElements();
+    }
+
+    @action
+    swapAfter(element: ArrayElement) {
+        let index = this.elements.indexOf(element) + 1;
+        this.elements.splice(index, 0);
+        this.elements = this.getCloneElements();
     }
 }
