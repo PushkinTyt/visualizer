@@ -32,15 +32,6 @@ export class MainStoreProvider extends React.Component<{}, undefined> {
                 viewState.currentStep = steps[0];
             }
         );
-
-        reaction(
-            () => arrayStore.elements,
-            () => {
-                if (algorithmChooser.algorithm) {
-                    algorithmChooser.algorithm.init();
-                }
-            }
-        );
     }
 
     render(): JSX.Element | null {
