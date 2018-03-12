@@ -5,11 +5,15 @@ import Chip from "material-ui/Chip";
 import {computed} from "mobx";
 import {ArrayElement} from "../../algorithms/arrayElement";
 import {ViewStateStore} from "../../stores/viewStateStore";
+import {ArrayStateStore} from "../../stores/arrayStateStore";
 
 export interface ArrayViewProps {
     viewState?: ViewStateStore;
+    arrayStore?: ArrayStateStore;
+    inStep?:boolean
 }
 
+@inject('arrayStore')
 @inject('viewState')
 @observer
 export class ArrayView extends Component<ArrayViewProps, undefined> {
@@ -18,7 +22,12 @@ export class ArrayView extends Component<ArrayViewProps, undefined> {
     get elements(): ArrayElement[] {
         let viewState = this.props.viewState;
         let currentStep = viewState && viewState.currentStep;
-        return currentStep && currentStep.array || []
+        let arrayStore = this.props.arrayStore;
+        if (this.props.inStep) {
+            return currentStep && currentStep.array || []
+        } else {
+            return arrayStore && arrayStore.elements || []
+        }
     }
 
     chips() {

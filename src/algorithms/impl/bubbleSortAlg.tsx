@@ -9,7 +9,7 @@ export class BubbleSortAlg extends AbstractAlg {
 
     init(): void {
         let steps = [];
-        let array = this.arrayStore.elements;
+        let array = this.arrayStore.getCloneElements();
 
         let stepNumber = 0;
         let comparisonCount = 0;

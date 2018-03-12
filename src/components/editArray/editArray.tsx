@@ -13,6 +13,7 @@ import MenuItem from "material-ui/MenuItem";
 import {RouteComponentProps} from "react-router";
 import FlatButton from "material-ui/FlatButton";
 import {ArrayView} from "../ArrayView/ArrayView";
+import {ArrayEditor} from "../ArrayEditor/ArrayEditor";
 
 export interface EditArrayProps extends RouteComponentProps<{}> {
     arrayStore?: ArrayStateStore;
@@ -64,8 +65,7 @@ export class EditArray extends Component<EditArrayProps, undefined> {
     arrayView() {
         let arrayStore = this.props.arrayStore;
         if (arrayStore && arrayStore.isCustom) {
-            // return <ArrayEditor/>
-            return <ArrayView/>
+            return <ArrayEditor/>
         } else {
             return <ArrayView/>
         }
@@ -81,16 +81,23 @@ export class EditArray extends Component<EditArrayProps, undefined> {
                     <Row>
                         <Col xs={12}>
                             <Paper zDepth={2} style={{margin: 10, padding: 10}}>
-                                <SelectField
-                                    style={{marginRight: 10}}
-                                    floatingLabelText="Выберите шаблон массива"
-                                    value={ident}
-                                    onChange={this.onSelectTemplate}>
-                                    {this.items.map(template => <MenuItem
-                                        primaryText={template.templateName}
-                                        value={template.ident}/>)}
-                                </SelectField>
-                                {this.showEditButton()}
+                                <div style={{display: 'flex'}}>
+                                    <div style={{flex: '1 1'}}>
+                                        <SelectField
+                                            fullWidth={true}
+                                            style={{marginRight: 10}}
+                                            floatingLabelText="Выберите шаблон массива"
+                                            value={ident}
+                                            onChange={this.onSelectTemplate}>
+                                            {this.items.map(template => <MenuItem
+                                                primaryText={template.templateName}
+                                                value={template.ident}/>)}
+                                        </SelectField>
+                                    </div>
+                                    <div style={{flex: '0 1', marginLeft: 15, marginTop: 35}}>
+                                        {this.showEditButton()}
+                                    </div>
+                                </div>
                             </Paper>
                         </Col>
                     </Row>

@@ -33,6 +33,10 @@ export class ArrayStateStore {
         this.chooseTemplate(this.templates[0].ident);
     }
 
+    getCloneElements():ArrayElement[] {
+        return ([] as ArrayElement[]).concat(this.elements)
+    }
+
     @computed
     get selectedTemplate() {
         let templates = this.templates.filter(template => template.ident === this.selectedTemplateIdent);

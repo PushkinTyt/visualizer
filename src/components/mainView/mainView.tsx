@@ -34,7 +34,7 @@ export class MainView extends React.Component<MainViewProps, MainViewState> {
                     <Row>
                         <Col xs={12} sm={12} lg={12}>
                             <Paper zDepth={2} style={{margin: 10, padding: 10}}>
-                                <ArrayView/>
+                                <ArrayView inStep={true}/>
                             </Paper>
                         </Col>
                     </Row>

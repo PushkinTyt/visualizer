@@ -12,7 +12,7 @@ export class Template {
 
     constructor(simpleTemplate: ISimpleTemplate) {
         this.templateName = simpleTemplate.templateName
-        this.elements = this.clone(simpleTemplate.elements.map(value => new ArrayElement(getUnicString(), value)))
+        this.elements = this.clone(simpleTemplate.elements.map(value => new ArrayElement(getUnicString(), value.toString())))
     }
 
     clone(elements: ArrayElement[] = []): ArrayElement[] {
