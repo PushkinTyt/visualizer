@@ -46,7 +46,7 @@ export class ArrayEditor extends Component<ArrayEditorProps, undefined> {
     }
 
     @autobind
-    onChangeValue(element:ArrayElement, value:string) {
+    onChangeValue(element:ArrayElement, value:number    ) {
         element.value = value
     }
 
