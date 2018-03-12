@@ -8,6 +8,7 @@ import {CodeListing} from "../codeListing/codeListing";
 import {ArrayView} from "../ArrayView/ArrayView";
 import Paper from "material-ui/Paper";
 import {AlgorithmChooser} from "../algorithmChooser/algorithmChooser";
+import {ListiningChooser} from "../ListiningChooser/ListiningChooser";
 
 export interface MainViewProps extends RouteComponentProps<{}> {
 }
@@ -22,8 +23,11 @@ export class MainView extends React.Component<MainViewProps, MainViewState> {
             <FullDiv>
                 <Grid>
                     <Row>
-                        <Col xs={12} sm={12} lg={12}>
+                        <Col xs={12} sm={6} lg={6}>
                             <AlgorithmChooser/>
+                        </Col>
+                        <Col xs={12} sm={6} lg={6}>
+                            <ListiningChooser/>
                         </Col>
                     </Row>
                     <Row>

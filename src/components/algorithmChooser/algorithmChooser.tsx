@@ -46,7 +46,7 @@ export class AlgorithmChooser extends Component<AlgorithmChooserProps, undefined
 
         return (
             <Paper zDepth={2} style={{margin: 10, padding: 10}}>
-                <SelectField style={{width: '100%'}}
+                <SelectField fullWidth={true}
                              floatingLabelText="Алгоритм сортировки"
                              value={algorithm}
                              onChange={(event, index, value) => algorithmChooser && algorithmChooser.choose(value)}>

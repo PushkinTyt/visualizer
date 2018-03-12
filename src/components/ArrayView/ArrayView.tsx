@@ -6,7 +6,6 @@ import {computed} from "mobx";
 import {ArrayElement} from "../../algorithms/arrayElement";
 import {ViewStateStore} from "../../stores/viewStateStore";
 import {ArrayStateStore} from "../../stores/arrayStateStore";
-import {AlgorithmStep} from "../../algorithms/algorithmStep";
 import Avatar from "material-ui/Avatar";
 import COMPARISON from 'material-ui/svg-icons/image/remove-red-eye';
 import SELECT from 'material-ui/svg-icons/action/search';
@@ -82,9 +81,11 @@ export class ArrayView extends Component<ArrayViewProps, undefined> {
     chips() {
         return this.elements.map(element => {
             return (
-                <Chip style={{
-                    margin: 4,
-                }} key={element.id}>
+                <Chip
+                    style={{
+                        margin: 4,
+                    }}
+                    key={element.id}>
                     {this.cheepAvatar(element)}
                     {element.value}
                 </Chip>
