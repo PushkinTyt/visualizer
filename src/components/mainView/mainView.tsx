@@ -32,23 +32,18 @@ export class MainView extends React.Component<MainViewProps, MainViewState> {
                     </Row>
                     <Row>
                         <Col xs={12} sm={12} lg={12}>
-                            <AlgorithmMsg/>
+                            <Paper zDepth={2} style={{margin: 10, padding: 10}}>
+                                <ArrayView inStep={true}/>
+                            </Paper>
                         </Col>
                     </Row>
                     <Row>
-                        <Row>
-                            <Col xs={12} sm={12} lg={12}>
-                                <Paper zDepth={2} style={{margin: 25, padding: 20}}>
-                                    <ArrayView inStep={true}/>
-                                </Paper>
-                            </Col>
-                        </Row>
                         <Col xs={12} sm={12} lg={12}>
                             <CodeListing/>
                         </Col>
                     </Row>
                     <Row>
-                        <Col xs={12} sm={6} lg={6}>
+                        <Col xs={12} sm={12} lg={12}>
                             <AlgorithmContolPanel/>
                         </Col>
                     </Row>
