@@ -5,6 +5,7 @@ import {ArrayElementHighlight} from "../../arrayElementHighlight";
 import {ArrayElement} from "../../arrayElement";
 import {InsertSortListingJS} from "./listing/insertSortListingJS";
 import {memoize} from "core-decorators";
+import {InsertSortListinigSharp} from "./listing/insertSortListingSharp";
 
 export class InsertSortAlg extends AbstractAlg {
     static id = 'InsertSortAlg';
@@ -54,17 +55,20 @@ export class InsertSortAlg extends AbstractAlg {
         }
 
         for (let i = 0; i < count; i++) {
+            steps.push(AlgorithmStep.clone(step).setListingLineIdent("selectElement1"));
+
+            let j = i - 1;
+
             step = AlgorithmStep.clone(step)
                 .setMessage(`Выбор элемента масива v=a[${i}]=${array[i].value}`)
                 .setArray(array)
-                .setListingLineIdent("selectElement")
+                .setListingLineIdent("selectElement2")
                 .setStepNumber(stepNumber++)
                 .setHighlightElements([ArrayElementHighlight.comparison(array[i])]);
 
             steps.push(step);
 
             let v = array[i];
-            let j = i - 1;
 
             while (needToSwapElements(i, j, v, steps)) {
                 step = AlgorithmStep.clone(step)
@@ -112,7 +116,8 @@ export class InsertSortAlg extends AbstractAlg {
     @memoize
     getViews(): AbstractView[] {
         return [
-            new AbstractView('JavaScript', InsertSortListingJS)
+            new AbstractView('JavaScript', InsertSortListingJS),
+            new AbstractView('C#', InsertSortListinigSharp)
         ];
     }
 

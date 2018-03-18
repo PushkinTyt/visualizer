@@ -3,7 +3,7 @@ import {AbstractAlg} from "../../abstractAlg";
 import {AbstractView} from "../../abstractView";
 import {AlgorithmStep} from "../../algorithmStep";
 import {ArrayElementHighlight} from "../../arrayElementHighlight";
-import {BubbleSortListingSharp} from "./listing/bubbleSortListinigSharp";
+import {BubbleSortListingSharp} from "./listing/bubbleSortListingSharp";
 import {memoize} from "core-decorators";
 import {BubbleSortListingJS} from "./listing/bubbleSortListinigJS";
 
