@@ -22,6 +22,16 @@ export class ViewStateStore {
         return this.steps.length;
     }
 
+    constructor() {
+        window.onkeydown = window.onkeyup = window.onkeypress = ev => {
+            if (ev.keyCode == 37)    {
+                this.back();
+            } else if (ev.keyCode == 39) {
+                this.next();
+            }
+        };
+    }
+
     next(): AlgorithmStep {
         let nextIndex = this.steps.indexOf(this.currentStep) + 1;
         return this.currentStep = this.steps[nextIndex];
