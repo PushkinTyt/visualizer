@@ -4,9 +4,6 @@ import {AlgorithmStep} from "../algorithms/algorithmStep";
 export class ViewStateStore {
 
     @observable
-    stepId: string;
-
-    @observable
     currentStep: AlgorithmStep = AlgorithmStep.create("Выберите алгоритм");
 
     @observable
@@ -48,6 +45,11 @@ export class ViewStateStore {
 
     toEnd() {
         return this.currentStep = this.steps[this.stepsCount - 1]
+    }
+
+    clear() {
+        this.steps = [];
+        this.currentStep = AlgorithmStep.create("Выберите алгоритм");
     }
 }
 

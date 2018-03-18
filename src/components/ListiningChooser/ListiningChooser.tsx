@@ -30,7 +30,7 @@ export class ListiningChooser extends Component<ListiningChooserProps, undefined
         return (
             <Paper zDepth={2} style={{margin: 10, padding: 10}}>
                 <SelectField fullWidth={true}
-                             floatingLabelText={'Язык'}
+                             floatingLabelText={'Выберите язык программирования'}
                              value={viewId}
                              onChange={(event, index, value) => {
                                  if (algorithmChooser) {
