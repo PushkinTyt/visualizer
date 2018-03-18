@@ -4,7 +4,7 @@ import {AlgorithmStep} from "../algorithms/algorithmStep";
 export class ViewStateStore {
 
     @observable
-    currentStep: AlgorithmStep = AlgorithmStep.create("Выберите алгоритм");
+    currentStep: AlgorithmStep = ViewStateStore.getInitialStep();
 
     @observable
     steps: AlgorithmStep[] = [];
@@ -49,7 +49,11 @@ export class ViewStateStore {
 
     clear() {
         this.steps = [];
-        this.currentStep = AlgorithmStep.create("Выберите алгоритм");
+        this.currentStep = ViewStateStore.getInitialStep();
+    }
+
+    private static getInitialStep() {
+        return AlgorithmStep.create("Выберите алгоритм сортировки");
     }
 }
 
