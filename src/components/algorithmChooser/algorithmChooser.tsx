@@ -44,9 +44,13 @@ export class AlgorithmChooser extends Component<AlgorithmChooserProps, undefined
 
         return (
             <SelectField fullWidth={true}
-                         floatingLabelText="Алгоритм сортировки"
+                         floatingLabelText="Выберите алгоритм сортировки"
                          value={algorithm}
                          onChange={(event, index, value) => algorithmChooser && algorithmChooser.choose(value)}>
+                    <MenuItem
+                        value={null}
+                        primaryText={''}
+                    />
                 {this._createAlgorithmChooserItems()}
             </SelectField>
         );

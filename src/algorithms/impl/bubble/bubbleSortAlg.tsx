@@ -1,11 +1,11 @@
 import * as React from "react";
-import {AbstractAlg} from "../abstractAlg";
-import {AbstractView} from "../abstractView";
-import {AlgorithmStep} from "../algorithmStep";
-import {ArrayElementHighlight} from "../arrayElementHighlight";
-import {BubbleSortListinigSharp} from "../listing/bubbleSortListinigSharp";
+import {AbstractAlg} from "../../abstractAlg";
+import {AbstractView} from "../../abstractView";
+import {AlgorithmStep} from "../../algorithmStep";
+import {ArrayElementHighlight} from "../../arrayElementHighlight";
+import {BubbleSortListingSharp} from "./listing/bubbleSortListingSharp";
 import {memoize} from "core-decorators";
-import {BubbleSortListinigJS} from "../listing/bubbleSortListinigJS";
+import {BubbleSortListingJS} from "./listing/bubbleSortListinigJS";
 
 
 export class BubbleSortAlg extends AbstractAlg {
@@ -85,8 +85,8 @@ export class BubbleSortAlg extends AbstractAlg {
     @memoize
     getViews(): AbstractView[] {
         return [
-            new AbstractView('C#', BubbleSortListinigSharp),
-            new AbstractView('JavaScript', BubbleSortListinigJS)
+            new AbstractView('C#', BubbleSortListingSharp),
+            new AbstractView('JavaScript', BubbleSortListingJS)
         ];
     }
 

@@ -46,7 +46,7 @@ export class ListiningChooser extends Component<ListiningChooserProps, undefined
 
         return (
             <SelectField fullWidth={true}
-                         floatingLabelText={'Язык'}
+                         floatingLabelText={'Выберите язык программирования'}
                          value={viewId}
                          onChange={(event, index, value) => {
                              if (algorithmChooser) {

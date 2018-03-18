@@ -6,13 +6,10 @@ import {autobind} from "core-decorators";
 export class ViewStateStore {
 
     @observable
-    stepId: string;
+    currentStep: AlgorithmStep = ViewStateStore.getInitialStep();
 
     @observable
     animation: boolean = false;
-
-    @observable
-    currentStep: AlgorithmStep = AlgorithmStep.create("Выберите алгоритм");
 
     @observable
     steps: AlgorithmStep[] = [];
@@ -28,6 +25,16 @@ export class ViewStateStore {
     @computed
     get stepsCount() {
         return this.steps.length;
+    }
+
+    constructor() {
+        window.onkeydown = ev => {
+            if (ev.keyCode == 37 && this.stepNumber > 0)    {
+                this.back();
+            } else if (ev.keyCode == 39 && this.stepNumber < this.stepsCount - 1) {
+                this.next();
+            }
+        };
     }
 
     @autobind
@@ -65,6 +72,15 @@ export class ViewStateStore {
     stopAnimation() {
         clearInterval(this.delayIdent);
         this.animation = false;
+    }
+
+    clear() {
+        this.steps = [];
+        this.currentStep = ViewStateStore.getInitialStep();
+    }
+
+    private static getInitialStep() {
+        return AlgorithmStep.create("Выберите алгоритм сортировки");
     }
 }
 
