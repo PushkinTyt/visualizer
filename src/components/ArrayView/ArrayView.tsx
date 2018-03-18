@@ -70,15 +70,13 @@ export class ArrayView extends Component<ArrayViewProps, undefined> {
     }
 
     cheepAvatar(element: ArrayElement) {
-        if (this.step) {
+        if (this.step && this.props.inStep) {
             const AvatarIcon = this.avatarMap[element.id] as any;
             if (AvatarIcon) {
-                return <Avatar icon={<AvatarIcon/>}/>
+                return <Avatar style={{borderRadius: 'none'}} icon={<AvatarIcon/>}/>
             }
-
             return null
         }
-
         return null
     }
 
@@ -88,6 +86,7 @@ export class ArrayView extends Component<ArrayViewProps, undefined> {
                 <Chip
                     style={{
                         margin: 4,
+                        borderRadius: 'none'
                     }}
                     key={element.id}>
                     {this.cheepAvatar(element)}

@@ -1,6 +1,5 @@
 import * as React from "react";
 import {Component} from "react";
-import Paper from "material-ui/Paper";
 import {inject, observer} from "mobx-react";
 import {AlgorithmChooserStore} from "../../stores/algorithmChooserStore";
 import {MenuItem, SelectField} from "material-ui";
@@ -44,18 +43,16 @@ export class AlgorithmChooser extends Component<AlgorithmChooserProps, undefined
         let algorithm = algorithmChooser && algorithmChooser.algorithm;
 
         return (
-            <Paper zDepth={2} style={{margin: 10, padding: 10}}>
-                <SelectField fullWidth={true}
-                             floatingLabelText="Выберите алгоритм сортировки"
-                             value={algorithm}
-                             onChange={(event, index, value) => algorithmChooser && algorithmChooser.choose(value)}>
+            <SelectField fullWidth={true}
+                         floatingLabelText="Выберите алгоритм сортировки"
+                         value={algorithm}
+                         onChange={(event, index, value) => algorithmChooser && algorithmChooser.choose(value)}>
                     <MenuItem
                         value={null}
                         primaryText={''}
                     />
-                    {this._createAlgorithmChooserItems()}
-                </SelectField>
-            </Paper>
+                {this._createAlgorithmChooserItems()}
+            </SelectField>
         );
     }
 }

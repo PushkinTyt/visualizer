@@ -11,6 +11,8 @@ import {ViewStateStore} from "../../stores/viewStateStore";
 import {computed} from "mobx";
 import {autobind} from "core-decorators";
 import FloatingActionButton from "material-ui/FloatingActionButton";
+import Badge from "material-ui/Badge";
+import {Row, Col} from "react-bootstrap";
 
 export interface AlgorithmContolPanelProps {
     viewState?: ViewStateStore;
@@ -103,43 +105,53 @@ export class AlgorithmContolPanel extends Component<AlgorithmContolPanelProps, u
         let currentStep = viewState && viewState.currentStep;
         let permutationCount = currentStep && currentStep.permutationCount;
         let comparisonCount = currentStep && currentStep.comparisonCount;
-        let stepNumber = currentStep != undefined && currentStep.stepNumber != undefined  && currentStep.stepNumber;
+        let stepNumber = currentStep != undefined && currentStep.stepNumber != undefined && currentStep.stepNumber;
         return (
             <Paper zDepth={2} style={{margin: 10, padding: 10}}>
-                <FloatingActionButton
-                    disabled={!this.canRefresh}
-                    onTouchTap={this.refresh}
-                    mini={true}
-                    style={style}>
-                    <RefreshIcon/>
-                </FloatingActionButton>
-                <FloatingActionButton
-                    secondary={true}
-                    onTouchTap={this.back}
-                    disabled={!this.canBack}
-                    mini={true}
-                    style={style}>
-                    <IconBack/>
-                </FloatingActionButton>
-                <FloatingActionButton
-                    disabled={!this.canNext}
-                    mini={true}
-                    style={style}
-                    backgroundColor="#a4c639"
-                    onTouchTap={this.next}>
-                    <IconNext/>
-                </FloatingActionButton>
-                <FloatingActionButton
-                    disabled={!this.canNext}
-                    mini={true}
-                    onTouchTap={this.toEnd}>
-                    <ToEndIcon/>
-                </FloatingActionButton>
-                <div>
-                    Номер шага: {stepNumber} <br/>
-                    Сравнений: {comparisonCount} <br/>
-                    Перестановок: {permutationCount}<br/>
-                </div>
+                <Row>
+                    <Col xs={12} sm={6} lg={6}>
+                        <FloatingActionButton
+                            disabled={!this.canRefresh} onTouchTap={this.refresh}
+                            mini={true}
+                            style={style}>
+                            <RefreshIcon/>
+                        </FloatingActionButton>
+                        <FloatingActionButton
+                            secondary={true}
+                            onTouchTap={this.back}
+                            disabled={!this.canBack}
+                            mini={true}
+                            style={style}>
+                            <IconBack/>
+                        </FloatingActionButton>
+                        <FloatingActionButton
+                            disabled={!this.canNext}
+                            mini={true}
+                            style={style}
+                            backgroundColor="#a4c639"
+                            onTouchTap={this.next}>
+                            <IconNext/>
+                        </FloatingActionButton>
+                        <FloatingActionButton
+                            disabled={!this.canNext}
+                            mini={true}
+                            onTouchTap={this.toEnd}>
+                            <ToEndIcon/>
+                        </FloatingActionButton>
+                    </Col>
+                    <Col xs={12} sm={6} lg={6}>
+                        <Badge
+                            badgeContent={stepNumber}
+                            primary={true}>
+                            <span>Номер шага</span>
+                        </Badge>
+                        <div>
+                            Номер шага: {stepNumber} <br/>
+                            Сравнений: {comparisonCount} <br/>
+                            Перестановок: {permutationCount}<br/>
+                        </div>
+                    </Col>
+                </Row>
             </Paper>
         );
     }

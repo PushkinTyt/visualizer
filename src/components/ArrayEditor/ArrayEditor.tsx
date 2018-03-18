@@ -13,7 +13,7 @@ import FloatingActionButton from "material-ui/FloatingActionButton";
 import {ArrayStateStore} from "../../stores/arrayStateStore";
 import './ArrayEditor.less'
 import {autobind, debounce} from "core-decorators";
-import {getUnicNumber, getUnicString} from "../../utils/utils";
+import {getUnicNumber} from "../../utils/utils";
 
 export interface ArrayEditorProps {
     arrayStore?: ArrayStateStore;
@@ -185,26 +185,24 @@ export class ArrayEditor extends Component<ArrayEditorProps, undefined> {
     render() {
         if (!this.count) {
             return (
-                <FullDiv>
-                    <Grid className={'array-editor'}>
-                        <FullDiv className={'array-element--before'}>
-                            <FloatingActionButton
-                                onTouchTap={this.createFirstElement}
-                                className={'array-element--before-button'}
-                                mini={true}>
-                                <AddIcon/>
-                            </FloatingActionButton>
-                        </FullDiv>
-                    </Grid>
+                <FullDiv className={'array-editor'}>
+                    <FullDiv className={'array-element--before'}>
+                        <FloatingActionButton
+                            onTouchTap={this.createFirstElement}
+                            className={'array-element--before-button'}
+                            mini={true}>
+                            <AddIcon/>
+                        </FloatingActionButton>
+                    </FullDiv>
                 </FullDiv>
             );
         }
 
 
         return (
-            <Grid className={'array-editor'}>
+            <div className={'array-editor'}>
                 {this.rows()}
-            </Grid>
+            </div>
         );
     }
 }
