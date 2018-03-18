@@ -42,7 +42,6 @@ export class AlgorithmChooser extends Component<AlgorithmChooserProps, undefined
     render() {
         let algorithmChooser = this.props.algorithmChooser;
         let algorithm = algorithmChooser && algorithmChooser.algorithm;
-        let algorithmName = algorithm && algorithm.id;
 
         return (
             <Paper zDepth={2} style={{margin: 10, padding: 10}}>

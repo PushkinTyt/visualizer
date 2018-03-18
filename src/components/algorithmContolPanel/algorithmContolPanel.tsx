@@ -85,6 +85,11 @@ export class AlgorithmContolPanel extends Component<AlgorithmContolPanelProps, u
     }
 
     render() {
+        let viewState = this.props.viewState;
+        let currentStep = viewState && viewState.currentStep;
+        let permutationCount = currentStep && currentStep.permutationCount;
+        let comparisonCount = currentStep && currentStep.comparisonCount;
+        let stepNumber = currentStep != undefined && currentStep.stepNumber != undefined  && currentStep.stepNumber;
         return (
             <Paper zDepth={2} style={{margin: 10, padding: 10}}>
                 <FloatingActionButton
@@ -114,6 +119,11 @@ export class AlgorithmContolPanel extends Component<AlgorithmContolPanelProps, u
                     onTouchTap={this.toEnd}>
                     <ToEndIcon/>
                 </FloatingActionButton>
+                <div>
+                    Номер шага: {stepNumber} <br/>
+                    Сравнений: {comparisonCount} <br/>
+                    Перестановок: {permutationCount}<br/>
+                </div>
             </Paper>
         );
     }

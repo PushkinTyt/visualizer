@@ -1,15 +1,15 @@
 import * as React from "react";
 import {Component} from "react";
-import Paper from "material-ui/Paper";
 import {ViewStateStore} from "../../stores/viewStateStore";
 import {inject, observer} from "mobx-react";
-import {AlgorithmChooserStore} from "../../stores/algorithmChooserStore";
 import {computed} from "mobx";
+import {Brace} from "../brace/brace";
 
 export interface CodeBlockProps {
     viewState?: ViewStateStore;
-    ident: string
+    ident?: string
     text: string
+    brace?:boolean
 }
 
 @inject('viewState')
@@ -25,15 +25,22 @@ export class CodeBlock extends Component<CodeBlockProps, undefined> {
 
 
     render() {
+        let body;
+        if (this.props.brace) {
+            body = <Brace>
+                {this.props.children}
+            </Brace>
+        } else {
+            body = <div style={{marginLeft:10}}>
+                {this.props.children}
+            </div>
+        }
         return (
             <div>
-                <div>
-                    {this.currentBlockIdent === this.props.ident ? '*' : null}
+                <div style={{color:this.currentBlockIdent === this.props.ident ? '#ff4081': undefined}}>
                     {this.props.text}
                 </div>
-                <div style={{marginLeft:10}}>
-                    {this.props.children}
-                </div>
+                {body}
             </div>
         );
     }

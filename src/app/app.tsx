@@ -4,6 +4,7 @@ import {mainClass} from "./app.less";
 import {Component} from "react";
 import {Routers} from "../route/routers";
 import darkBaseTheme from "material-ui/styles/baseThemes/darkBaseTheme";
+import lightBaseTheme from "material-ui/styles/baseThemes/lightBaseTheme";
 import getMuiTheme from "material-ui/styles/getMuiTheme";
 import AppBar from "material-ui/AppBar";
 import {FullDiv} from "../components/fullDiv";
@@ -12,6 +13,7 @@ import {Menu} from "../components/menu/menu";
 import history from "../route/history";
 import {Route, Router} from "react-router";
 import {BackButton} from "../components/menu/backButton";
+import {AlgorithmMsg} from "../components/algorithmMsg/algorithmMsg";
 
 let PerfectScrollbar = require("react-perfect-scrollbar");
 
@@ -30,7 +32,7 @@ export class App extends Component<AppProps, AppState> {
                     <FullDiv>
                         <AppBar
                             zDepth={2}
-                            title="Визуализатор сортировок"
+                            title={<AlgorithmMsg/>}
                             iconElementRight={
                                 <Router history={history}>
                                     <Route exact path="/" component={Menu}/>

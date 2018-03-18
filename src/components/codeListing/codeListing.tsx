@@ -7,11 +7,12 @@ import {AlgorithmChooserStore} from "../../stores/algorithmChooserStore";
 import {computed} from "mobx";
 
 export interface CodeListingProps {
-    viewState?: ViewStateStore;
     algorithmChooser?: AlgorithmChooserStore;
 }
 
-@inject('viewState')
+let PerfectScrollbar = require("react-perfect-scrollbar");
+
+
 @inject('algorithmChooser')
 @observer
 export class CodeListing extends Component<CodeListingProps, undefined> {
@@ -24,15 +25,6 @@ export class CodeListing extends Component<CodeListingProps, undefined> {
     }
 
     render() {
-        let viewState = this.props.viewState;
-        let algorithmChooser = this.props.algorithmChooser;
-
-        let alogrithm = algorithmChooser && algorithmChooser.algorithm;
-        let algorithmName = alogrithm && alogrithm.getAlgName();
-
-        let currentStep = viewState && viewState.currentStep;
-        let listingLineIdent = currentStep && currentStep.listingLineIdent;
-
         let ViewComponent = this.view && this.view.view;
 
         if (!ViewComponent) {
@@ -40,14 +32,11 @@ export class CodeListing extends Component<CodeListingProps, undefined> {
         }
 
         return (
-            <div>
-                <Paper zDepth={2} style={{margin: 10, padding: 10}}>
+            <Paper zDepth={2} style={{margin: 10, padding: 10}}>
+                <PerfectScrollbar>
                     <ViewComponent/>
-                </Paper>
-                <Paper zDepth={2} style={{margin: 10, padding: 10}}>
-                    Строчка листинга: {listingLineIdent}<br/>
-                </Paper>
-            </div>
+                </PerfectScrollbar>
+            </Paper>
         );
     }
 }

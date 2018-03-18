@@ -19,7 +19,7 @@ module.exports = {
     devtool: "eval",
     output: {
         filename: "app.js",
-        publicPath: "public/js/",
+        publicPath: "./js/",
         path: path.join(__dirname, "public/js")
     },
     module: {

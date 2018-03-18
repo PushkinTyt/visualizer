@@ -13,7 +13,7 @@ export abstract class AbstractAlg {
     }
 
     public init(): void {
-        this.makeSteps()
+        this.makeSteps();
         this.arrayStore.changed = false;
     }
 
