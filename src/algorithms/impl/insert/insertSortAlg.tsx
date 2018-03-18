@@ -1,8 +1,10 @@
-import {AbstractAlg} from "../abstractAlg";
-import {AbstractView} from "../abstractView";
-import {AlgorithmStep} from "../algorithmStep";
-import {ArrayElementHighlight, HighLightType} from "../arrayElementHighlight";
-import {ArrayElement} from "../arrayElement";
+import {AbstractAlg} from "../../abstractAlg";
+import {AbstractView} from "../../abstractView";
+import {AlgorithmStep} from "../../algorithmStep";
+import {ArrayElementHighlight} from "../../arrayElementHighlight";
+import {ArrayElement} from "../../arrayElement";
+import {InsertSortListingJS} from "./listing/insertSortListingJS";
+import {memoize} from "core-decorators";
 
 export class InsertSortAlg extends AbstractAlg {
     static id = 'InsertSortAlg';
@@ -27,11 +29,19 @@ export class InsertSortAlg extends AbstractAlg {
 
         function needToSwapElements(i: number, j: number, v: ArrayElement, step: AlgorithmStep, steps: AlgorithmStep[]) {
             if (j < 0) {
+                step = AlgorithmStep.clone(step)
+                    .setMessage(`Сравнение j=${j} с 0`)
+                    .setStepNumber(stepNumber++)
+                    .setListingLineIdent("compare")
+                    .setHighlightElements([]);
+
+                steps.push(step);
+
                 return false;
             }
 
             step = AlgorithmStep.clone(step)
-                .setMessage(`Сравнение a[${j}]=${array[j].value} с v=a[${i}]=${v.value}`)
+                .setMessage(`Сравнение j=${j} с 0 и a[${j}]=${array[j].value} с v=a[${i}]=${v.value}`)
                 .setListingLineIdent("compare")
                 .setComparisonCount(++comparisonCount)
                 .setStepNumber(stepNumber++)
@@ -57,11 +67,22 @@ export class InsertSortAlg extends AbstractAlg {
             let j = i - 1;
 
             while (needToSwapElements(i, j, v, step, steps)) {
+                step = AlgorithmStep.clone(steps[steps.length - 1])
+                    .setMessage(`Перемещаем элемент a[${j}]=${array[j].value} на ${j + 1} место`)
+                    .setPermutationCount(++permutationCount)
+                    .setStepNumber(stepNumber++)
+                    .setListingLineIdent("permutation");
+
+                steps.push(step);
+
                 array[j + 1] = array[j];
+
+                steps.push(AlgorithmStep.clone(step).setListingLineIdent("decrease"));
+
                 j--;
             }
 
-            step = AlgorithmStep.clone(step)
+            step = AlgorithmStep.clone(steps[steps.length - 1])
                 .setMessage(`Перемещаем элемент v=a[${i}]=${v.value} на ${j + 1} место`)
                 .setListingLineIdent("setPlace")
                 .setPermutationCount(++permutationCount)
@@ -72,6 +93,8 @@ export class InsertSortAlg extends AbstractAlg {
             steps.push(step);
 
             array[j + 1] = v;
+
+            steps.push(AlgorithmStep.clone(step).setArray(array).setListingLineIdent("for.start"));
         }
 
         steps.push(AlgorithmStep.clone(step)
@@ -86,8 +109,11 @@ export class InsertSortAlg extends AbstractAlg {
         this.viewState.currentStep = steps[0];
     }
 
+    @memoize
     getViews(): AbstractView[] {
-        return [];
+        return [
+            new AbstractView('JavaScript', InsertSortListingJS)
+        ];
     }
 
     getAlgName(): string {

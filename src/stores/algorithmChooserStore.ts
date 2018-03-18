@@ -1,9 +1,9 @@
 import {AbstractAlg} from "../algorithms/abstractAlg";
 import {computed, observable, ObservableMap} from "mobx";
 import {ViewStateStore} from "./viewStateStore";
-import {BubbleSortAlg} from "../algorithms/impl/bubbleSortAlg";
+import {BubbleSortAlg} from "../algorithms/impl/bubble/bubbleSortAlg";
 import {ArrayStateStore} from "./arrayStateStore";
-import {InsertSortAlg} from "../algorithms/impl/insertSortAlg";
+import {InsertSortAlg} from "../algorithms/impl/insert/insertSortAlg";
 
 export class AlgorithmChooserStore {
 

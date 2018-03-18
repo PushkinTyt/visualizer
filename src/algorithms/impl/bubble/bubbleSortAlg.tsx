@@ -1,11 +1,11 @@
 import * as React from "react";
-import {AbstractAlg} from "../abstractAlg";
-import {AbstractView} from "../abstractView";
-import {AlgorithmStep} from "../algorithmStep";
-import {ArrayElementHighlight} from "../arrayElementHighlight";
-import {BubbleSortListingSharp} from "../listing/bubbleSortListinigSharp";
+import {AbstractAlg} from "../../abstractAlg";
+import {AbstractView} from "../../abstractView";
+import {AlgorithmStep} from "../../algorithmStep";
+import {ArrayElementHighlight} from "../../arrayElementHighlight";
+import {BubbleSortListingSharp} from "./listing/bubbleSortListinigSharp";
 import {memoize} from "core-decorators";
-import {BubbleSortListingJS} from "../listing/bubbleSortListinigJS";
+import {BubbleSortListingJS} from "./listing/bubbleSortListinigJS";
 
 
 export class BubbleSortAlg extends AbstractAlg {
