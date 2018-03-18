@@ -5,7 +5,7 @@ import {ArrayElementHighlight} from "../../arrayElementHighlight";
 import {ArrayElement} from "../../arrayElement";
 import {InsertSortListingJS} from "./listing/insertSortListingJS";
 import {memoize} from "core-decorators";
-import {InsertSortListinigSharp} from "./listing/insertSortListingSharp";
+import {InsertSortListingSharp} from "./listing/insertSortListingSharp";
 
 export class InsertSortAlg extends AbstractAlg {
     static id = 'InsertSortAlg';
@@ -117,7 +117,7 @@ export class InsertSortAlg extends AbstractAlg {
     getViews(): AbstractView[] {
         return [
             new AbstractView('JavaScript', InsertSortListingJS),
-            new AbstractView('C#', InsertSortListinigSharp)
+            new AbstractView('C#', InsertSortListingSharp)
         ];
     }
 
