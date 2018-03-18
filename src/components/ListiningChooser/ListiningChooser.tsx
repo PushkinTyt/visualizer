@@ -8,7 +8,6 @@ import {AbstractView} from "../../algorithms/abstractView";
 import Badge from "material-ui/Badge";
 import AddIcon from 'material-ui/svg-icons/content/link';
 import IconButton from "material-ui/IconButton";
-import history from "../../route/history";
 
 export interface ListiningChooserProps {
     algorithmChooser?: AlgorithmChooserStore
@@ -32,16 +31,22 @@ export class ListiningChooser extends Component<ListiningChooserProps, undefined
 
 
     render() {
+        let algorithmChooser = this.props.algorithmChooser;
+
+        let algorithm = algorithmChooser && algorithmChooser.algorithm;
+        if (!algorithm) {
+            return <div/>
+        }
+
         if (this.noItems) {
             return <Badge
                 badgeContent={<IconButton href={'https://github.com/PushkinTyt/visualizer'}>
                     <AddIcon/>
                 </IconButton>}>
-                У этого алгоритма нет литинга, ты можешь добавить его сам
+                Для этого алгоритма нет листинга, ты можешь добавить его сам
             </Badge>
         }
 
-        let algorithmChooser = this.props.algorithmChooser;
         let viewId = algorithmChooser && algorithmChooser.viewId;
 
         return (
