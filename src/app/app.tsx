@@ -1,17 +1,15 @@
 import * as React from "react";
+import {Component} from "react";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import {mainClass} from "./app.less";
-import {Component} from "react";
 import {Routers} from "../route/routers";
 import getMuiTheme from "material-ui/styles/getMuiTheme";
-import AppBar from "material-ui/AppBar";
 import {FullDiv} from "../components/fullDiv";
 import {MainStoreProvider} from "../stores/mainStoreProvaider";
-import {Menu} from "../components/menu/menu";
+import {MainScreenAppBar} from "../components/menu/MainScreenAppBar";
 import history from "../route/history";
 import {Route, Router} from "react-router";
-import {BackButton} from "../components/menu/backButton";
-import {AlgorithmMsg} from "../components/algorithmMsg/algorithmMsg";
+import {EditArrayAppBar} from "../components/menu/EditArrayAppBar";
 import {AppStore} from "../stores/appStore";
 
 let PerfectScrollbar = require("react-perfect-scrollbar");
@@ -35,20 +33,12 @@ export class App extends Component<AppProps, AppState> {
             <MuiThemeProvider muiTheme={getMuiTheme(this.appStore.theme.ui)}>
                 <MainStoreProvider app={this.appStore}>
                     <FullDiv className={`${this.appStore.theme.mainClassName} ${mainClass}`}>
-                        <AppBar
-                            zDepth={2}
-                            title={<AlgorithmMsg/>}
-                            iconElementRight={
-                                <Router history={history}>
-                                    <Route exact path="/" component={Menu}/>
-                                </Router>
-                            }
-                            iconElementLeft={
-                                <Router history={history}>
-                                    <Route exact path="/editArray" component={BackButton}/>
-                                </Router>
-                            }
-                        />
+                        <Router history={history}>
+                            <Route exact path="/" component={MainScreenAppBar}/>
+                        </Router>
+                        <Router history={history}>
+                            <Route exact path="/editArray" component={EditArrayAppBar}/>
+                        </Router>
                         <div>
                             <PerfectScrollbar>
                                 <div>
