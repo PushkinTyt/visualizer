@@ -2,7 +2,7 @@ import * as React from "react";
 import {Component} from "react";
 import {CodeBlock} from "../../components/codeBlock/codeBlock";
 
-export class BubbleSortListinigJS extends Component<{}, undefined> {
+export class BubbleSortListingJS extends Component<{}, undefined> {
 
     render() {
         return (
