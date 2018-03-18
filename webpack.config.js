@@ -4,7 +4,7 @@ var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var path = require("path");
 
 var indexHtmlWebpackPlugin = new HtmlWebpackPlugin({
-    filename:  path.join(__dirname, "public/index.html"),
+    filename:  path.join(__dirname, "index.html"),
     title: "Visualizer",
     hash: false,
     inject: "head"
@@ -20,7 +20,7 @@ module.exports = {
     output: {
         filename: "app.js",
         publicPath: "./js/",
-        path: path.join(__dirname, "public/js")
+        path: path.join(__dirname, "/js")
     },
     module: {
         loaders: [
@@ -43,6 +43,6 @@ module.exports = {
     plugins: [
         indexHtmlWebpackPlugin,
         processEnvPlugin,
-        new ExtractTextPlugin("./public/css/[name].css")
+        new ExtractTextPlugin("./css/[name].css")
     ]
 };

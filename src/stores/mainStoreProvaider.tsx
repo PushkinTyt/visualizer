@@ -4,14 +4,16 @@ import {AlgorithmChooserStore} from "./algorithmChooserStore";
 import {ViewStateStore} from "./viewStateStore";
 import {ArrayStateStore} from "./arrayStateStore";
 import {reaction} from "mobx";
+import {AppStore} from "./appStore";
 
 export interface MainStoreProviderStores {
     algorithmChooser: AlgorithmChooserStore;
     viewState: ViewStateStore;
     arrayStore: ArrayStateStore;
+    appStore:AppStore;
 }
 
-export class MainStoreProvider extends React.Component<{}, undefined> {
+export class MainStoreProvider extends React.Component<{app:AppStore}, undefined> {
 
     stores: MainStoreProviderStores;
 
@@ -23,7 +25,8 @@ export class MainStoreProvider extends React.Component<{}, undefined> {
         this.stores = {
             algorithmChooser,
             viewState,
-            arrayStore
+            arrayStore,
+            appStore: this.props.app
         }
 
         reaction(

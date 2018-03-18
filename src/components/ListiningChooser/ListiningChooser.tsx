@@ -1,11 +1,14 @@
 import * as React from "react";
 import {Component} from "react";
-import Paper from "material-ui/Paper";
 import {inject, observer} from "mobx-react";
 import {AlgorithmChooserStore} from "../../stores/algorithmChooserStore";
 import {MenuItem, SelectField} from "material-ui";
 import {computed} from "mobx";
 import {AbstractView} from "../../algorithms/abstractView";
+import Badge from "material-ui/Badge";
+import AddIcon from 'material-ui/svg-icons/content/link';
+import IconButton from "material-ui/IconButton";
+import history from "../../route/history";
 
 export interface ListiningChooserProps {
     algorithmChooser?: AlgorithmChooserStore
@@ -22,32 +25,44 @@ export class ListiningChooser extends Component<ListiningChooserProps, undefined
         return algorithm && algorithm.getViews() || []
     }
 
+    @computed
+    get noItems(): boolean {
+        return !this.views.length
+    }
+
 
     render() {
+        if (this.noItems) {
+            return <Badge
+                badgeContent={<IconButton href={'https://github.com/PushkinTyt/visualizer'}>
+                    <AddIcon/>
+                </IconButton>}>
+                У этого алгоритма нет литинга, ты можешь добавить его сам
+            </Badge>
+        }
+
         let algorithmChooser = this.props.algorithmChooser;
         let viewId = algorithmChooser && algorithmChooser.viewId;
 
         return (
-            <Paper zDepth={2} style={{margin: 10, padding: 10}}>
-                <SelectField fullWidth={true}
-                             floatingLabelText={'Язык'}
-                             value={viewId}
-                             onChange={(event, index, value) => {
-                                 if (algorithmChooser) {
-                                     algorithmChooser.viewId = value
-                                 }
-                             }}>
-                    <MenuItem
-                        value={null}
-                        primaryText={''}
-                    />
-                    {this.views.map(view => <MenuItem
-                        value={view.id}
-                        key={view.id}
-                        primaryText={view.name}
-                    />)}
-                </SelectField>
-            </Paper>
+            <SelectField fullWidth={true}
+                         floatingLabelText={'Язык'}
+                         value={viewId}
+                         onChange={(event, index, value) => {
+                             if (algorithmChooser) {
+                                 algorithmChooser.viewId = value
+                             }
+                         }}>
+                <MenuItem
+                    value={null}
+                    primaryText={''}
+                />
+                {this.views.map(view => <MenuItem
+                    value={view.id}
+                    key={view.id}
+                    primaryText={view.name}
+                />)}
+            </SelectField>
         );
     }
 }

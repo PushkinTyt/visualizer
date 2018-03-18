@@ -20,7 +20,7 @@ config.module.loaders = loaders.concat(config.module.loaders);
 config.devServer = {
     host: '0.0.0.0',
     port: 3000,
-    contentBase: 'public',
+    contentBase: './',
     disableHostCheck: true
 };
 

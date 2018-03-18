@@ -3,8 +3,6 @@ import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import {mainClass} from "./app.less";
 import {Component} from "react";
 import {Routers} from "../route/routers";
-import darkBaseTheme from "material-ui/styles/baseThemes/darkBaseTheme";
-import lightBaseTheme from "material-ui/styles/baseThemes/lightBaseTheme";
 import getMuiTheme from "material-ui/styles/getMuiTheme";
 import AppBar from "material-ui/AppBar";
 import {FullDiv} from "../components/fullDiv";
@@ -14,6 +12,7 @@ import history from "../route/history";
 import {Route, Router} from "react-router";
 import {BackButton} from "../components/menu/backButton";
 import {AlgorithmMsg} from "../components/algorithmMsg/algorithmMsg";
+import {AppStore} from "../stores/appStore";
 
 let PerfectScrollbar = require("react-perfect-scrollbar");
 
@@ -25,11 +24,17 @@ export interface AppState {
 
 export class App extends Component<AppProps, AppState> {
 
+    appStore:AppStore;
+
+    componentWillMount() {
+        this.appStore = new AppStore()
+    }
+
     render() {
         return (
-            <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
-                <MainStoreProvider>
-                    <FullDiv>
+            <MuiThemeProvider muiTheme={getMuiTheme(this.appStore.theme.ui)}>
+                <MainStoreProvider app={this.appStore}>
+                    <FullDiv className={`${this.appStore.theme.mainClassName} ${mainClass}`}>
                         <AppBar
                             zDepth={2}
                             title={<AlgorithmMsg/>}
@@ -44,7 +49,7 @@ export class App extends Component<AppProps, AppState> {
                                 </Router>
                             }
                         />
-                        <div className={mainClass}>
+                        <div>
                             <PerfectScrollbar>
                                 <div>
                                     <Routers/>

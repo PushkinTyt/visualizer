@@ -5,7 +5,7 @@ import {Grid, Row, Col} from "react-bootstrap";
 import {inject, observer} from "mobx-react";
 import {ArrayStateStore, ArrayTemplate} from "../../stores/arrayStateStore";
 import {FullDiv} from "../fullDiv";
-import {computed, observable} from "mobx";
+import {computed} from "mobx";
 import SelectField from "material-ui/SelectField";
 import {autobind} from "core-decorators";
 import {TouchTapEvent} from "material-ui";

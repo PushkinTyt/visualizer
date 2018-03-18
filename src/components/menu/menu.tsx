@@ -6,9 +6,9 @@ import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import MenuItem from "material-ui/MenuItem";
 import history from "../../route/history";
 import {RouteComponentProps} from "react-router";
+import Divider from "material-ui/Divider";
 
 export interface MenuProps extends RouteComponentProps<{}> {
-
 }
 
 export class Menu extends Component<MenuProps, {}> {
@@ -21,6 +21,7 @@ export class Menu extends Component<MenuProps, {}> {
                 targetOrigin={{horizontal: 'right', vertical: 'top'}}
                 anchorOrigin={{horizontal: 'right', vertical: 'top'}}>
                 <MenuItem primaryText="Редактировать массив" onClick={() => history.push('/editArray')}/>
+                <Divider />
             </IconMenu>
         );
     }
