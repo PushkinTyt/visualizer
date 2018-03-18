@@ -111,33 +111,34 @@ export class AlgorithmContolPanel extends Component<AlgorithmContolPanelProps, u
                 <Row>
                     <Col xs={12} sm={6} lg={6}>
                         <FloatingActionButton
-                    disabled={!this.canRefresh}onTouchTap={this.refresh}
-                    mini={true}
-                    style={style}>
-                    <RefreshIcon/>
-                </FloatingActionButton>
-                <FloatingActionButton
-                    secondary={true}
-                    onTouchTap={this.back}
-                    disabled={!this.canBack}
-                    mini={true}
-                    style={style}>
-                    <IconBack/>
-                </FloatingActionButton>
-                <FloatingActionButton
-                    disabled={!this.canNext}
-                    mini={true}
-                    style={style}
-                    backgroundColor="#a4c639"
-                    onTouchTap={this.next}>
-                    <IconNext/>
-                </FloatingActionButton>
-                <FloatingActionButtondisabled={!this.canNext}
-                    mini={true}
-                    onTouchTap={this.toEnd}>
-                    <ToEndIcon/>
-                </FloatingActionButton>
-                </Col>
+                            disabled={!this.canRefresh} onTouchTap={this.refresh}
+                            mini={true}
+                            style={style}>
+                            <RefreshIcon/>
+                        </FloatingActionButton>
+                        <FloatingActionButton
+                            secondary={true}
+                            onTouchTap={this.back}
+                            disabled={!this.canBack}
+                            mini={true}
+                            style={style}>
+                            <IconBack/>
+                        </FloatingActionButton>
+                        <FloatingActionButton
+                            disabled={!this.canNext}
+                            mini={true}
+                            style={style}
+                            backgroundColor="#a4c639"
+                            onTouchTap={this.next}>
+                            <IconNext/>
+                        </FloatingActionButton>
+                        <FloatingActionButton
+                            disabled={!this.canNext}
+                            mini={true}
+                            onTouchTap={this.toEnd}>
+                            <ToEndIcon/>
+                        </FloatingActionButton>
+                    </Col>
                     <Col xs={12} sm={6} lg={6}>
                         <Badge
                             badgeContent={stepNumber}
@@ -145,10 +146,11 @@ export class AlgorithmContolPanel extends Component<AlgorithmContolPanelProps, u
                             <span>Номер шага</span>
                         </Badge>
                         <div>
-                    Номер шага: {stepNumber} <br/>
-                    Сравнений: {comparisonCount} <br/>
-                    Перестановок: {permutationCount}<br/>
-                </div></Col>
+                            Номер шага: {stepNumber} <br/>
+                            Сравнений: {comparisonCount} <br/>
+                            Перестановок: {permutationCount}<br/>
+                        </div>
+                    </Col>
                 </Row>
             </Paper>
         );
