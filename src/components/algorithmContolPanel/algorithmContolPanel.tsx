@@ -40,7 +40,10 @@ export class AlgorithmContolPanel extends Component<AlgorithmContolPanelProps, u
     @computed
     get canNext(): boolean {
         let viewState = this.props.viewState;
-        if (viewState) {
+        let algorithmChooser = this.props.algorithmChooser;
+        let algorithm = algorithmChooser && algorithmChooser.algorithm;
+
+        if (algorithm && viewState) {
             return viewState.stepNumber !== (viewState.stepsCount - 1)
         } else {
             return false
@@ -50,11 +53,22 @@ export class AlgorithmContolPanel extends Component<AlgorithmContolPanelProps, u
     @computed
     get canBack(): boolean {
         let viewState = this.props.viewState;
-        if (viewState) {
+        let algorithmChooser = this.props.algorithmChooser;
+        let algorithm = algorithmChooser && algorithmChooser.algorithm;
+
+        if (algorithm && viewState) {
             return viewState.stepNumber !== 0
         } else {
             return false
         }
+    }
+
+    @computed
+    get canRefresh(): boolean {
+        let algorithmChooser = this.props.algorithmChooser;
+        let algorithm = algorithmChooser && algorithmChooser.algorithm;
+
+        return !!algorithm;
     }
 
     @autobind
@@ -93,6 +107,7 @@ export class AlgorithmContolPanel extends Component<AlgorithmContolPanelProps, u
         return (
             <Paper zDepth={2} style={{margin: 10, padding: 10}}>
                 <FloatingActionButton
+                    disabled={!this.canRefresh}
                     onTouchTap={this.refresh}
                     mini={true}
                     style={style}>
@@ -115,6 +130,7 @@ export class AlgorithmContolPanel extends Component<AlgorithmContolPanelProps, u
                     <IconNext/>
                 </FloatingActionButton>
                 <FloatingActionButton
+                    disabled={!this.canNext}
                     mini={true}
                     onTouchTap={this.toEnd}>
                     <ToEndIcon/>

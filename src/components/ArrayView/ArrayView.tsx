@@ -11,10 +11,12 @@ import COMPARISON from 'material-ui/svg-icons/image/remove-red-eye';
 import SELECT from 'material-ui/svg-icons/action/search';
 import PERMUTATION from 'material-ui/svg-icons/action/find-replace';
 import {HighLightType} from "../../algorithms/arrayElementHighlight";
+import {AlgorithmChooserStore} from "../../stores/algorithmChooserStore";
 
 export interface ArrayViewProps {
     viewState?: ViewStateStore;
     arrayStore?: ArrayStateStore;
+    algorithmChooser?: AlgorithmChooserStore
     inStep?: boolean
 }
 
@@ -30,6 +32,7 @@ interface elemIconMap {
 
 @inject('arrayStore')
 @inject('viewState')
+@inject('algorithmChooser')
 @observer
 export class ArrayView extends Component<ArrayViewProps, undefined> {
 
@@ -44,7 +47,8 @@ export class ArrayView extends Component<ArrayViewProps, undefined> {
         let viewState = this.props.viewState;
         let currentStep = viewState && viewState.currentStep;
         let arrayStore = this.props.arrayStore;
-        if (this.props.inStep) {
+        let algorithm = this.props.algorithmChooser && this.props.algorithmChooser.algorithm;
+        if (this.props.inStep && algorithm) {
             return currentStep && currentStep.array || []
         } else {
             return arrayStore && arrayStore.elements || []
