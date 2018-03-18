@@ -20,7 +20,7 @@ export class ViewStateStore {
     }
 
     constructor() {
-        window.onkeydown = window.onkeyup = window.onkeypress = ev => {
+        window.onkeydown = ev => {
             if (ev.keyCode == 37 && this.stepNumber > 0)    {
                 this.back();
             } else if (ev.keyCode == 39 && this.stepNumber < this.stepsCount - 1) {

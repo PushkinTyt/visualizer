@@ -27,7 +27,7 @@ export class InsertSortAlg extends AbstractAlg {
         steps.push(step);
         steps.push(AlgorithmStep.clone(step).setListingLineIdent("for.start"));
 
-        function needToSwapElements(i: number, j: number, v: ArrayElement, step: AlgorithmStep, steps: AlgorithmStep[]) {
+        function needToSwapElements(i: number, j: number, v: ArrayElement, steps: AlgorithmStep[]) {
             if (j < 0) {
                 step = AlgorithmStep.clone(step)
                     .setMessage(`Сравнение j=${j} с 0`)
@@ -66,8 +66,8 @@ export class InsertSortAlg extends AbstractAlg {
             let v = array[i];
             let j = i - 1;
 
-            while (needToSwapElements(i, j, v, step, steps)) {
-                step = AlgorithmStep.clone(steps[steps.length - 1])
+            while (needToSwapElements(i, j, v, steps)) {
+                step = AlgorithmStep.clone(step)
                     .setMessage(`Перемещаем элемент a[${j}]=${array[j].value} на ${j + 1} место`)
                     .setPermutationCount(++permutationCount)
                     .setStepNumber(stepNumber++)
@@ -82,7 +82,7 @@ export class InsertSortAlg extends AbstractAlg {
                 j--;
             }
 
-            step = AlgorithmStep.clone(steps[steps.length - 1])
+            step = AlgorithmStep.clone(step)
                 .setMessage(`Перемещаем элемент v=a[${i}]=${v.value} на ${j + 1} место`)
                 .setListingLineIdent("setPlace")
                 .setPermutationCount(++permutationCount)
