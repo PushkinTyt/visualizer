@@ -14,7 +14,7 @@ export class EditArrayAppBar extends Component<BackButtonProps, Readonly<{}>> {
         return (
             <AppBar
                 zDepth={2}
-                title={"Редактировать алгоритм"}
+                title={"!Редактировать алгоритм!"}
                 iconElementLeft={<IconButton onClick={() => history.goBack()} onTouchStart={() => history.goBack()}><IconBack/></IconButton>}
             />
         );
