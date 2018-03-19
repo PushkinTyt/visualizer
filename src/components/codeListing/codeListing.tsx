@@ -1,7 +1,6 @@
 import * as React from "react";
 import {Component} from "react";
 import Paper from "material-ui/Paper";
-import {ViewStateStore} from "../../stores/viewStateStore";
 import {inject, observer} from "mobx-react";
 import {AlgorithmChooserStore} from "../../stores/algorithmChooserStore";
 import {computed} from "mobx";
@@ -9,9 +8,6 @@ import {computed} from "mobx";
 export interface CodeListingProps {
     algorithmChooser?: AlgorithmChooserStore;
 }
-
-let PerfectScrollbar = require("react-perfect-scrollbar");
-
 
 @inject('algorithmChooser')
 @observer
@@ -33,9 +29,9 @@ export class CodeListing extends Component<CodeListingProps, Readonly<{}>> {
 
         return (
             <Paper zDepth={2} style={{margin: 10, padding: 10}}>
-                <PerfectScrollbar>
+                <div style={{overflow: 'auto'}}>
                     <ViewComponent/>
-                </PerfectScrollbar>
+                </div>
             </Paper>
         );
     }

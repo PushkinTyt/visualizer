@@ -12,9 +12,7 @@ import {Router, Route} from 'react-router-dom'
 import {EditArrayAppBar} from "../components/menu/EditArrayAppBar";
 import {AppStore} from "../stores/appStore";
 
-const AnyRoute:any = Route as any
-
-let PerfectScrollbar = require("react-perfect-scrollbar");
+const AnyRoute: any = Route as any
 
 export interface AppProps {
 }
@@ -35,18 +33,16 @@ export class App extends Component<AppProps, AppState> {
             <MuiThemeProvider muiTheme={getMuiTheme(this.appStore.theme.ui)}>
                 <MainStoreProvider app={this.appStore}>
                     <FullDiv className={`${this.appStore.theme.mainClassName} ${mainClass}`}>
-                        <Router history={history}>
-                            <AnyRoute exact={true} path="/" component={MainScreenAppBar}/>
-                        </Router>
-                        <Router history={history}>
-                            <AnyRoute exact path="/editArray" component={EditArrayAppBar}/>
-                        </Router>
-                        <div>
-                            <PerfectScrollbar>
-                                <div>
-                                    <Routers/>
-                                </div>
-                            </PerfectScrollbar>
+                        <div style={{position: "fixed", zIndex: 2, width: '100%'}}>
+                            <Router history={history}>
+                                <AnyRoute exact={true} path="/" component={MainScreenAppBar}/>
+                            </Router>
+                            <Router history={history}>
+                                <AnyRoute exact path="/editArray" component={EditArrayAppBar}/>
+                            </Router>
+                        </div>
+                        <div style={{height: 'calc(100% - 66px)', marginTop: 66, overflow: 'auto'}}>
+                            <Routers/>
                         </div>
                     </FullDiv>
                 </MainStoreProvider>
