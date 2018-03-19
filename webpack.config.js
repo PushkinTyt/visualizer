@@ -4,6 +4,7 @@ var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var path = require("path");
 
 var indexHtmlWebpackPlugin = new HtmlWebpackPlugin({
+    template:  path.join(__dirname, "default_index.ejs"),
     filename:  path.join(__dirname, "index.html"),
     title: "Visualizer",
     hash: false,

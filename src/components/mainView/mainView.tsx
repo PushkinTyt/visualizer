@@ -24,10 +24,10 @@ export class MainView extends React.Component<MainViewProps, MainViewState> {
                 <Grid>
                     <Paper zDepth={2} style={{margin: 10, padding: 10}}>
                         <Row>
-                            <Col xs={12} sm={6} lg={6}>
+                            <Col xs={12} sm={12} lg={6}>
                                 <AlgorithmChooser/>
                             </Col>
-                            <Col xs={12} sm={6} lg={6}>
+                            <Col xs={12} sm={12} lg={6}>
                                 <ListiningChooser/>
                             </Col>
                         </Row>

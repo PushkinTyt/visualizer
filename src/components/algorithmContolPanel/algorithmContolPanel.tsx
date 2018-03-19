@@ -109,7 +109,7 @@ export class AlgorithmContolPanel extends Component<AlgorithmContolPanelProps, R
         return (
             <Paper zDepth={2} style={{margin: 10, padding: 10}}>
                 <Row>
-                    <Col xs={12} sm={6} lg={6}>
+                    <Col xs={12} sm={12} lg={6}>
                         <FloatingActionButton
                             disabled={!this.canRefresh}
                             onTouchStart={this.refresh}
@@ -144,7 +144,7 @@ export class AlgorithmContolPanel extends Component<AlgorithmContolPanelProps, R
                             <ToEndIcon/>
                         </FloatingActionButton>
                     </Col>
-                    <Col xs={12} sm={6} lg={6}>
+                    <Col xs={12} sm={12} lg={6}>
                         <Badge
                             badgeContent={stepNumber}
                             primary={true}>
