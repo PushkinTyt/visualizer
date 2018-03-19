@@ -30,6 +30,7 @@ export class MainScreenAppBar extends Component<MenuProps, Readonly<{}>> {
                         <Divider/>
                     </IconMenu>
                 }
+                iconElementLeft={<div/>}
             />
         );
     }

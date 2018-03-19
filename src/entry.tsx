@@ -14,7 +14,7 @@ function init() {
     entryDiv.style.position = "fixed";
     document.body.appendChild(entryDiv);
     ReactDOM.render(
-        <App/>,
+        <App/> as any,
         entryDiv
     );
 }

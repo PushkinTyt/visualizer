@@ -14,6 +14,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/core-decorators": "0.10.32",
     "@types/history": "4.6.2",
     "@types/material-ui": "0.21.1",
     "@types/react": "16.0.40",
@@ -42,7 +43,7 @@
     "webpack-dev-server": "2.4.5"
   },
   "dependencies": {
-    "core-decorators": "0.20.0",
+    "core-decorators": "0.18.0",
     "history": "4.7.2",
     "material-ui": "0.20.0",
     "mobx": "4.1.0",

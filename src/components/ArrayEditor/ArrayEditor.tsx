@@ -1,6 +1,6 @@
 import * as React from "react";
 import {Component} from "react";
-import {Grid, Row, Col} from "react-bootstrap";
+import {Row, Col} from "react-bootstrap";
 import {inject, observer} from "mobx-react";
 import AddIcon from 'material-ui/svg-icons/content/add';
 import SwapIcon from 'material-ui/svg-icons/action/swap-vert';

@@ -2,6 +2,10 @@
 # yarn lockfile v1
 
 
+"@types/core-decorators@0.10.32":
+  version "0.10.32"
+  resolved "https://registry.yarnpkg.com/@types/core-decorators/-/core-decorators-0.10.32.tgz#3cb635da99980176832ec420875f7efce1822b5e"
+
 "@types/history@*", "@types/history@4.6.2":
   version "4.6.2"
   resolved "https://registry.yarnpkg.com/@types/history/-/history-4.6.2.tgz#12cfaba693ba20f114ed5765467ff25fdf67ddb0"
@@ -974,9 +978,9 @@ copy-descriptor@^0.1.0:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/copy-descriptor/-/copy-descriptor-0.1.1.tgz#676f6eb3c39997c2ee1ac3a924fd6124748f578d"
 
-core-decorators@0.20.0:
-  version "0.20.0"
-  resolved "https://registry.yarnpkg.com/core-decorators/-/core-decorators-0.20.0.tgz#605896624053af8c28efbe735c25a301a61c65c5"
+core-decorators@0.18.0:
+  version "0.18.0"
+  resolved "https://registry.yarnpkg.com/core-decorators/-/core-decorators-0.18.0.tgz#5411f83cdb36c58320803c4492dbc4b023cfef71"
 
 core-js@^1.0.0:
   version "1.2.7"
