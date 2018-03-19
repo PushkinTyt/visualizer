@@ -1,6 +1,5 @@
 import * as React from "react";
 import {RouteComponentProps} from "react-router";
-import {Grid, Row, Col} from "react-bootstrap";
 import {FullDiv} from "../fullDiv";
 import {AlgorithmContolPanel} from "../algorithmContolPanel/algorithmContolPanel";
 import {CodeListing} from "../codeListing/codeListing";
@@ -8,6 +7,7 @@ import {ArrayView} from "../ArrayView/ArrayView";
 import Paper from "material-ui/Paper";
 import {AlgorithmChooser} from "../algorithmChooser/algorithmChooser";
 import {ListiningChooser} from "../ListiningChooser/ListiningChooser";
+import {Col, Grid, Row} from "react-bootstrap";
 
 export interface MainViewProps extends RouteComponentProps<{}> {
 }

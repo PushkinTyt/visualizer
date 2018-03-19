@@ -14,7 +14,7 @@ export interface CodeBlockProps {
 
 @inject('viewState')
 @observer
-export class CodeBlock extends Component<CodeBlockProps, undefined> {
+export class CodeBlock extends Component<CodeBlockProps, Readonly<{}>> {
 
     @computed
     get currentBlockIdent(): string {

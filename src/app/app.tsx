@@ -8,9 +8,11 @@ import {FullDiv} from "../components/fullDiv";
 import {MainStoreProvider} from "../stores/mainStoreProvaider";
 import {MainScreenAppBar} from "../components/menu/MainScreenAppBar";
 import history from "../route/history";
-import {Route, Router} from "react-router";
+import {Router, Route} from 'react-router-dom'
 import {EditArrayAppBar} from "../components/menu/EditArrayAppBar";
 import {AppStore} from "../stores/appStore";
+
+const AnyRoute:any = Route as any
 
 let PerfectScrollbar = require("react-perfect-scrollbar");
 
@@ -22,7 +24,7 @@ export interface AppState {
 
 export class App extends Component<AppProps, AppState> {
 
-    appStore:AppStore;
+    appStore: AppStore;
 
     componentWillMount() {
         this.appStore = new AppStore()
@@ -34,10 +36,10 @@ export class App extends Component<AppProps, AppState> {
                 <MainStoreProvider app={this.appStore}>
                     <FullDiv className={`${this.appStore.theme.mainClassName} ${mainClass}`}>
                         <Router history={history}>
-                            <Route exact path="/" component={MainScreenAppBar}/>
+                            <AnyRoute exact={true} path="/" component={MainScreenAppBar}/>
                         </Router>
                         <Router history={history}>
-                            <Route exact path="/editArray" component={EditArrayAppBar}/>
+                            <AnyRoute exact path="/editArray" component={EditArrayAppBar}/>
                         </Router>
                         <div>
                             <PerfectScrollbar>
@@ -52,3 +54,4 @@ export class App extends Component<AppProps, AppState> {
         );
     }
 }
+

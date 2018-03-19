@@ -13,7 +13,7 @@ export interface MainStoreProviderStores {
     appStore:AppStore;
 }
 
-export class MainStoreProvider extends React.Component<{app:AppStore}, undefined> {
+export class MainStoreProvider extends React.Component<{app:AppStore}, Readonly<{}>> {
 
     stores: MainStoreProviderStores;
 

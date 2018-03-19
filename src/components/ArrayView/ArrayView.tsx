@@ -34,7 +34,7 @@ interface elemIconMap {
 @inject('viewState')
 @inject('algorithmChooser')
 @observer
-export class ArrayView extends Component<ArrayViewProps, undefined> {
+export class ArrayView extends Component<ArrayViewProps, Readonly<{}>> {
 
     @computed
     get step() {

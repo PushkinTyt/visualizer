@@ -15,7 +15,7 @@ let PerfectScrollbar = require("react-perfect-scrollbar");
 
 @inject('algorithmChooser')
 @observer
-export class CodeListing extends Component<CodeListingProps, undefined> {
+export class CodeListing extends Component<CodeListingProps, Readonly<{}>> {
 
     @computed
     get view() {

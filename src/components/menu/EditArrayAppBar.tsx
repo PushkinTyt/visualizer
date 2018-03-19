@@ -6,10 +6,10 @@ import history from "../../route/history";
 import {RouteComponentProps} from "react-router";
 import {AppBar} from "material-ui";
 
-export interface BackButtonProps extends RouteComponentProps<{}> {
+export interface BackButtonProps extends RouteComponentProps<Readonly<{}>> {
 }
 
-export class EditArrayAppBar extends Component<BackButtonProps, {}> {
+export class EditArrayAppBar extends Component<BackButtonProps, Readonly<{}>> {
     render() {
         return (
             <AppBar

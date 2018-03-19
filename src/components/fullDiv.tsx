@@ -1,10 +1,11 @@
 import * as React from "react";
-import {HTMLProps} from "react";
+import {DetailedHTMLProps, HTMLAttributes, StatelessComponent} from "react";
 
-export function FullDiv(props: HTMLProps<HTMLDivElement>) {
-    return (
-        <div {...props} style={{height: "100%", flex: "1 1"}}>
-            {props.children}
-        </div>
-    )
-}
+export const FullDiv: StatelessComponent<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>> =
+    ({children, ...props}) => {
+        return (
+            <div {...props} style={{height: "100%", flex: "1 1"}}>
+                {children}
+            </div>
+        )
+    }

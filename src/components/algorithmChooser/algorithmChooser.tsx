@@ -14,26 +14,26 @@ const style = {
 
 @inject('algorithmChooser')
 @observer
-export class AlgorithmChooser extends Component<AlgorithmChooserProps, undefined> {
+export class AlgorithmChooser extends Component<AlgorithmChooserProps, Readonly<{}>> {
 
     _createAlgorithmChooserItems() {
         let algorithmChooser = this.props.algorithmChooser;
-        let algorithms = algorithmChooser && algorithmChooser.algorithms.values();
+        let algorithms = algorithmChooser && algorithmChooser.algorithms;
 
-        let menuItems = [];
-        for (let i = 0; algorithms && i < algorithms.length; i++) {
-            let algorithm = algorithms[i];
-            let item = (
-                <MenuItem
-                    value={algorithm}
-                    key={algorithm.id}
-                    primaryText={algorithm.getAlgName()}
-                />
-            );
+        let menuItems:JSX.Element[] = [];
+        if (algorithms) {
+            algorithms.forEach((algorithm) => {
+                let item = (
+                    <MenuItem
+                        value={algorithm}
+                        key={algorithm.id}
+                        primaryText={algorithm.getAlgName()}
+                    />
+                );
 
-            menuItems.push(item);
+                menuItems.push(item);
+            })
         }
-
         return menuItems;
     }
 
@@ -47,10 +47,11 @@ export class AlgorithmChooser extends Component<AlgorithmChooserProps, undefined
                          floatingLabelText="Выберите алгоритм сортировки"
                          value={algorithm}
                          onChange={(event, index, value) => algorithmChooser && algorithmChooser.choose(value)}>
-                    <MenuItem
-                        value={null}
-                        primaryText={''}
-                    />
+                <MenuItem
+                    key={'null'}
+                    value={null}
+                    primaryText={' '}
+                />
                 {this._createAlgorithmChooserItems()}
             </SelectField>
         );

@@ -5,15 +5,15 @@ import IconButton from "material-ui/IconButton";
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import MenuItem from "material-ui/MenuItem";
 import history from "../../route/history";
-import {RouteComponentProps} from "react-router";
+import {RouteComponentProps} from "react-router-dom";
 import Divider from "material-ui/Divider";
 import AppBar from "material-ui/AppBar";
 import {AlgorithmMsg} from "../algorithmMsg/algorithmMsg";
 
-export interface MenuProps extends RouteComponentProps<{}> {
+export interface MenuProps extends RouteComponentProps<any> {
 }
 
-export class MainScreenAppBar extends Component<MenuProps, {}> {
+export class MainScreenAppBar extends Component<MenuProps, Readonly<{}>> {
     render() {
         return (
             <AppBar

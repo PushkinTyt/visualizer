@@ -13,7 +13,7 @@ export interface NotificationProps {
 
 @inject('algorithmChooser')
 @observer
-export class Notification extends Component<NotificationProps, undefined> {
+export class Notification extends Component<NotificationProps, Readonly<{}>> {
 
 
     componentWillMount() {

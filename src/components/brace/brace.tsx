@@ -4,7 +4,7 @@ import {Component} from "react";
 let br1 = '\{';
 let br2 = '\}';
 
-export class Brace extends Component<{}, undefined> {
+export class Brace extends Component<{}, any> {
 
     render() {
         return (

@@ -27,7 +27,7 @@ const style = {
 @inject('viewState')
 @inject('algorithmChooser')
 @observer
-export class AlgorithmContolPanel extends Component<AlgorithmContolPanelProps, undefined> {
+export class AlgorithmContolPanel extends Component<AlgorithmContolPanelProps, Readonly<{}>> {
 
     @autobind
     next() {
@@ -111,14 +111,17 @@ export class AlgorithmContolPanel extends Component<AlgorithmContolPanelProps, u
                 <Row>
                     <Col xs={12} sm={6} lg={6}>
                         <FloatingActionButton
-                            disabled={!this.canRefresh} onTouchTap={this.refresh}
+                            disabled={!this.canRefresh}
+                            onTouchStart={this.refresh}
+                            onClick={this.refresh}
                             mini={true}
                             style={style}>
                             <RefreshIcon/>
                         </FloatingActionButton>
                         <FloatingActionButton
                             secondary={true}
-                            onTouchTap={this.back}
+                            onTouchStart={this.back}
+                            onClick={this.back}
                             disabled={!this.canBack}
                             mini={true}
                             style={style}>
@@ -129,13 +132,15 @@ export class AlgorithmContolPanel extends Component<AlgorithmContolPanelProps, u
                             mini={true}
                             style={style}
                             backgroundColor="#a4c639"
-                            onTouchTap={this.next}>
+                            onClick={this.next}
+                            onTouchStart={this.next}>
                             <IconNext/>
                         </FloatingActionButton>
                         <FloatingActionButton
                             disabled={!this.canNext}
                             mini={true}
-                            onTouchTap={this.toEnd}>
+                            onClick={this.toEnd}
+                            onTouchStart={this.toEnd}>
                             <ToEndIcon/>
                         </FloatingActionButton>
                     </Col>

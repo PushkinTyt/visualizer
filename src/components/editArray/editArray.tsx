@@ -1,5 +1,5 @@
 import * as React from "react";
-import {Component} from "react";
+import {Component, SyntheticEvent} from "react";
 import Paper from "material-ui/Paper";
 import {Grid, Row, Col} from "react-bootstrap";
 import {inject, observer} from "mobx-react";
@@ -8,7 +8,6 @@ import {FullDiv} from "../fullDiv";
 import {computed} from "mobx";
 import SelectField from "material-ui/SelectField";
 import {autobind} from "core-decorators";
-import {TouchTapEvent} from "material-ui";
 import MenuItem from "material-ui/MenuItem";
 import {RouteComponentProps} from "react-router";
 import FlatButton from "material-ui/FlatButton";
@@ -24,7 +23,7 @@ export interface EditArrayProps extends RouteComponentProps<{}> {
 @inject('arrayStore')
 @inject('algorithmChooser')
 @observer
-export class EditArray extends Component<EditArrayProps, undefined> {
+export class EditArray extends Component<EditArrayProps, Readonly<{}>> {
 
     @computed
     get items(): ArrayTemplate[] {
@@ -37,7 +36,7 @@ export class EditArray extends Component<EditArrayProps, undefined> {
     }
 
     @autobind
-    onSelectTemplate(event: TouchTapEvent, index: number, value: string) {
+    onSelectTemplate(event: SyntheticEvent<{}>, index: number, value: string) {
         let arrayStore = this.props.arrayStore;
         if (arrayStore) {
             arrayStore.chooseTemplate(value)
@@ -51,7 +50,8 @@ export class EditArray extends Component<EditArrayProps, undefined> {
                 fullWidth={true}
                 style={{top: -20}}
                 label="Редактировать"
-                onTouchTap={this.setCustom}/>
+                onClick={this.setCustom}
+                onTouchStart={this.setCustom}/>
         } else {
             return null
         }
@@ -125,7 +125,8 @@ export class EditArray extends Component<EditArrayProps, undefined> {
                                             style={{top: -20}}
                                             label="применить"
                                             secondary={true}
-                                            onTouchTap={this.finishEditArray}/>
+                                            onClick={this.finishEditArray}
+                                            onTouchStart={this.finishEditArray}/>
                                     </div>
                                 </div>
                             </Paper>

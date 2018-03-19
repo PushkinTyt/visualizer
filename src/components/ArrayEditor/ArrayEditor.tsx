@@ -22,7 +22,7 @@ export interface ArrayEditorProps {
 
 @inject('arrayStore')
 @observer
-export class ArrayEditor extends Component<ArrayEditorProps, undefined> {
+export class ArrayEditor extends Component<ArrayEditorProps, Readonly<{}>> {
 
     @computed
     get elements(): ArrayElement[] {
@@ -79,7 +79,8 @@ export class ArrayEditor extends Component<ArrayEditorProps, undefined> {
                     </div>
                     <div className={'array-element-buttons'}>
                         <FloatingActionButton
-                            onTouchTap={() => this.delete(element)}
+                            onTouchStart={() => this.delete(element)}
+                            onClick={() => this.delete(element)}
                             className={'array-element-buttons--button'}
                             mini={true}>
                             <DeleteIcon/>
@@ -99,7 +100,8 @@ export class ArrayEditor extends Component<ArrayEditorProps, undefined> {
         return (
             <FullDiv className={'array-element--before'}>
                 <FloatingActionButton
-                    onTouchTap={() => this.addBefore(element)}
+                    onTouchStart={() => this.addBefore(element)}
+                    onClick={() => this.addBefore(element)}
                     className={'array-element--before-button'}
                     mini={true}>
                     <AddIcon/>
@@ -112,14 +114,16 @@ export class ArrayEditor extends Component<ArrayEditorProps, undefined> {
         return (
             <FullDiv className={'array-element--after'}>
                 <FloatingActionButton
-                    onTouchTap={() => this.addAfter(element)}
+                    onTouchStart={() => this.addAfter(element)}
+                    onClick={() => this.addAfter(element)}
                     className={'array-element--before-button'}
                     mini={true}>
                     <AddIcon/>
                 </FloatingActionButton>
                 {(index !== (this.count - 1)) ?
                     <FloatingActionButton
-                        onTouchTap={() => this.swapAfter(element)}
+                        onTouchStart={() => this.swapAfter(element)}
+                        onClick={() => this.swapAfter(element)}
                         className={'array-element--before-button'}
                         mini={true}>
                         <SwapIcon/>
@@ -188,7 +192,8 @@ export class ArrayEditor extends Component<ArrayEditorProps, undefined> {
                 <FullDiv className={'array-editor'}>
                     <FullDiv className={'array-element--before'}>
                         <FloatingActionButton
-                            onTouchTap={this.createFirstElement}
+                            onTouchStart={this.createFirstElement}
+                            onClick={this.createFirstElement}
                             className={'array-element--before-button'}
                             mini={true}>
                             <AddIcon/>

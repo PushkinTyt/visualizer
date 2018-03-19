@@ -15,7 +15,7 @@ export interface ListiningChooserProps {
 
 @inject('algorithmChooser')
 @observer
-export class ListiningChooser extends Component<ListiningChooserProps, undefined> {
+export class ListiningChooser extends Component<ListiningChooserProps, Readonly<{}>> {
 
     @computed
     get views(): AbstractView[] {

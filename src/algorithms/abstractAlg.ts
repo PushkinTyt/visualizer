@@ -2,7 +2,6 @@ import {AbstractView} from "./abstractView";
 import {ViewStateStore} from "../stores/viewStateStore";
 import {ArrayStateStore} from "../stores/arrayStateStore";
 import {AlgorithmStep} from "./algorithmStep";
-import {ArrayElement} from "./arrayElement";
 import {getUnicString} from "../utils/utils";
 
 export abstract class AbstractAlg {

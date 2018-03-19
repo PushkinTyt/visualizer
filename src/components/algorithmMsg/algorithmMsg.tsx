@@ -11,7 +11,7 @@ export interface AlgorithmMsgProps {
 
 @inject('viewState')
 @observer
-export class AlgorithmMsg extends Component<AlgorithmMsgProps, undefined> {
+export class AlgorithmMsg extends Component<AlgorithmMsgProps, Readonly<{}>> {
 
     render() {
         let viewState = this.props.viewState;

@@ -4,7 +4,7 @@ import history from "./history";
 import {FullDiv} from "../components/fullDiv";
 import {MainView} from "../components/mainView/mainView";
 import {EditArray} from "../components/editArray/editArray";
-
+const AnyRoute:any = Route as any;
 export interface RoutersProps {
 }
 
@@ -17,8 +17,8 @@ export class Routers extends React.Component<RoutersProps, RoutersState> {
         return (
             <Router history={history}>
                 <FullDiv>
-                    <Route exact path="/" component={MainView}/>
-                    <Route exact path="/editArray" component={EditArray}/>
+                    <AnyRoute exact path="/" component={MainView}/>
+                    <AnyRoute exact path="/editArray" component={EditArray}/>
                 </FullDiv>
             </Router>
         );
