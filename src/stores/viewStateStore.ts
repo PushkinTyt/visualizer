@@ -59,8 +59,8 @@ export class ViewStateStore {
     delayIdent:any;
 
     toEnd():void {
-        this.animation = true;
         if (this.animationStep) {
+            this.animation = true;
             this.animationStepNext()
         } else {
             this.currentStep = this.steps[this.stepsCount - 1]
