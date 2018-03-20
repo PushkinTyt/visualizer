@@ -1,9 +1,10 @@
 import * as React from "react";
-import {Component} from "react";
+import {Component, CSSProperties} from "react";
 import IconNext from 'material-ui/svg-icons/navigation/chevron-right';
 import IconBack from 'material-ui/svg-icons/navigation/chevron-left';
 import RefreshIcon from 'material-ui/svg-icons/navigation/refresh';
 import ToEndIcon from 'material-ui/svg-icons/navigation/arrow-forward';
+import StopIcon from 'material-ui/svg-icons/av/stop';
 import Paper from "material-ui/Paper";
 import {inject, observer} from "mobx-react";
 import {AlgorithmChooserStore} from "../../stores/algorithmChooserStore";
@@ -11,8 +12,11 @@ import {ViewStateStore} from "../../stores/viewStateStore";
 import {computed} from "mobx";
 import {autobind} from "core-decorators";
 import FloatingActionButton from "material-ui/FloatingActionButton";
-import Badge from "material-ui/Badge";
+import COMPARISON from 'material-ui/svg-icons/image/remove-red-eye';
+import PERMUTATION from 'material-ui/svg-icons/action/find-replace';
 import {Row, Col} from "react-bootstrap";
+import Chip from "material-ui/Chip";
+import Avatar from "material-ui/Avatar";
 
 export interface AlgorithmContolPanelProps {
     viewState?: ViewStateStore;
@@ -22,12 +26,19 @@ export interface AlgorithmContolPanelProps {
 
 const style = {
     marginRight: 20,
-};
+    alignSelf: 'center'
+} as CSSProperties;
 
 @inject('viewState')
 @inject('algorithmChooser')
 @observer
 export class AlgorithmContolPanel extends Component<AlgorithmContolPanelProps, Readonly<{}>> {
+
+    @computed
+    get isAnimation(): boolean {
+        let viewState = this.props.viewState;
+        return !!viewState && viewState.animation
+    }
 
     @autobind
     next() {
@@ -46,7 +57,7 @@ export class AlgorithmContolPanel extends Component<AlgorithmContolPanelProps, R
         let algorithm = algorithmChooser && algorithmChooser.algorithm;
 
         if (algorithm && viewState) {
-            return viewState.stepNumber !== (viewState.stepsCount - 1)
+            return viewState.stepNumber !== (viewState.stepsCount - 1) && !this.isAnimation
         } else {
             return false
         }
@@ -59,7 +70,7 @@ export class AlgorithmContolPanel extends Component<AlgorithmContolPanelProps, R
         let algorithm = algorithmChooser && algorithmChooser.algorithm;
 
         if (algorithm && viewState) {
-            return viewState.stepNumber !== 0
+            return viewState.stepNumber !== 0 && !this.isAnimation
         } else {
             return false
         }
@@ -70,7 +81,7 @@ export class AlgorithmContolPanel extends Component<AlgorithmContolPanelProps, R
         let algorithmChooser = this.props.algorithmChooser;
         let algorithm = algorithmChooser && algorithmChooser.algorithm;
 
-        return !!algorithm;
+        return !!algorithm && !this.isAnimation;
     }
 
     @autobind
@@ -92,11 +103,20 @@ export class AlgorithmContolPanel extends Component<AlgorithmContolPanelProps, R
     }
 
     @autobind
-    toEnd() {
+    goAnimation() {
         let viewState = this.props.viewState;
 
         if (viewState) {
             viewState.toEnd();
+        }
+    }
+
+    @autobind
+    stopAnimation() {
+        let viewState = this.props.viewState;
+
+        if (viewState) {
+            viewState.stopAnimation();
         }
     }
 
@@ -105,11 +125,10 @@ export class AlgorithmContolPanel extends Component<AlgorithmContolPanelProps, R
         let currentStep = viewState && viewState.currentStep;
         let permutationCount = currentStep && currentStep.permutationCount;
         let comparisonCount = currentStep && currentStep.comparisonCount;
-        let stepNumber = currentStep != undefined && currentStep.stepNumber != undefined && currentStep.stepNumber;
         return (
             <Paper zDepth={2} style={{margin: 10, padding: 10}}>
                 <Row>
-                    <Col xs={12} sm={12} lg={6}>
+                    <Col xs={12} sm={12} lg={12} style={{display: "flex"}}>
                         <FloatingActionButton
                             disabled={!this.canRefresh}
                             onTouchStart={this.refresh}
@@ -136,25 +155,39 @@ export class AlgorithmContolPanel extends Component<AlgorithmContolPanelProps, R
                             onTouchStart={this.next}>
                             <IconNext/>
                         </FloatingActionButton>
-                        <FloatingActionButton
-                            disabled={!this.canNext}
-                            mini={true}
-                            onClick={this.toEnd}
-                            onTouchStart={this.toEnd}>
-                            <ToEndIcon/>
-                        </FloatingActionButton>
-                    </Col>
-                    <Col xs={12} sm={12} lg={6}>
-                        <Badge
-                            badgeContent={stepNumber}
-                            primary={true}>
-                            <span>Номер шага</span>
-                        </Badge>
-                        <div>
-                            Номер шага: {stepNumber} <br/>
-                            Сравнений: {comparisonCount} <br/>
-                            Перестановок: {permutationCount}<br/>
-                        </div>
+                        {this.isAnimation ?
+                            <FloatingActionButton
+                                mini={true}
+                                style={style}
+                                onClick={this.stopAnimation}
+                                onTouchStart={this.stopAnimation}>
+                                <StopIcon/>
+                            </FloatingActionButton> :
+                            <FloatingActionButton
+                                disabled={!this.canNext}
+                                mini={true}
+                                style={style}
+                                onClick={this.goAnimation}
+                                onTouchStart={this.goAnimation}>
+                                <ToEndIcon/>
+                            </FloatingActionButton>}
+                        {currentStep ?
+                            <span style={{display: 'inline-block'}}>
+                                <Chip
+                                    style={{
+                                        margin: 4
+                                    }}>
+                                    <Avatar icon={<COMPARISON/>}/>
+                                    {comparisonCount}
+                                </Chip>
+                                <Chip
+                                    style={{
+                                        margin: 4
+                                    }}>
+                                    <Avatar icon={<PERMUTATION/>}/>
+                                    {permutationCount}
+                                </Chip>
+                            </span> : null}
                     </Col>
                 </Row>
             </Paper>

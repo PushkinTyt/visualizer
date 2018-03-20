@@ -11,6 +11,7 @@ import history from "../route/history";
 import {Router, Route} from 'react-router-dom'
 import {EditArrayAppBar} from "../components/menu/EditArrayAppBar";
 import {AppStore} from "../stores/appStore";
+import {observer} from "mobx-react";
 
 const AnyRoute: any = Route as any
 
@@ -20,6 +21,7 @@ export interface AppProps {
 export interface AppState {
 }
 
+@observer
 export class App extends Component<AppProps, AppState> {
 
     appStore: AppStore;

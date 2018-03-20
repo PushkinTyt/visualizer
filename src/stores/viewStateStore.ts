@@ -15,7 +15,7 @@ export class ViewStateStore {
     steps: AlgorithmStep[] = [];
 
     @observable
-    animationStep: number = 10;
+    animationStep: number = 100;
 
     @computed
     get stepNumber() {
@@ -60,11 +60,20 @@ export class ViewStateStore {
 
     toEnd():void {
         this.animation = true;
-        this.delayIdent = setInterval(() => {
-            if (this.stepNumber < this.stepsCount - 1) {
-                this.next()
+        if (this.animationStep) {
+            this.animationStepNext()
+        } else {
+            this.currentStep = this.steps[this.stepsCount - 1]
+        }
+    }
+
+    private animationStepNext() {
+        this.delayIdent = setTimeout(() => {
+            if (this.animation && this.stepNumber < this.stepsCount - 1) {
+                this.next();
+                this.animationStepNext();
             } else {
-                this.stopAnimation()
+                this.stopAnimation();
             }
         }, this.animationStep)
     }
