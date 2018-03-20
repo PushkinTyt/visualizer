@@ -15,7 +15,11 @@ export class EditArrayAppBar extends Component<BackButtonProps, Readonly<{}>> {
             <AppBar
                 zDepth={2}
                 title={"Редактировать алгоритм"}
-                iconElementLeft={<IconButton onClick={() => history.goBack()}><IconBack/></IconButton>}
+                iconElementLeft={<IconButton
+                    onTouchStart={() => history.goBack()}
+                    onClick={() => history.goBack()}>
+                    <IconBack/>
+                </IconButton>}
             />
         );
     }
