@@ -125,6 +125,8 @@ export class AlgorithmContolPanel extends Component<AlgorithmContolPanelProps, R
         let currentStep = viewState && viewState.currentStep;
         let permutationCount = currentStep && currentStep.permutationCount;
         let comparisonCount = currentStep && currentStep.comparisonCount;
+        let algorithmChooser = this.props.algorithmChooser;
+        let algorithm = algorithmChooser && algorithmChooser.algorithm;
         return (
             <Paper zDepth={2} style={{margin: 10, padding: 10}}>
                 <Row>
@@ -171,21 +173,21 @@ export class AlgorithmContolPanel extends Component<AlgorithmContolPanelProps, R
                                 onTouchStart={this.goAnimation}>
                                 <ToEndIcon/>
                             </FloatingActionButton>}
-                        {currentStep ?
+                        {algorithm && currentStep ?
                             <span style={{display: 'inline-block'}}>
                                 <Chip
                                     style={{
                                         margin: 4
                                     }}>
                                     <Avatar icon={<COMPARISON/>}/>
-                                    {comparisonCount}
+                                    Сравнения: {comparisonCount}
                                 </Chip>
                                 <Chip
                                     style={{
                                         margin: 4
                                     }}>
                                     <Avatar icon={<PERMUTATION/>}/>
-                                    {permutationCount}
+                                    Перестановки: {permutationCount}
                                 </Chip>
                             </span> : null}
                     </Col>
