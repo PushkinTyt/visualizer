@@ -7,8 +7,7 @@
     "test_version": "node -v && npm --version",
     "yarn_install": "yarn",
     "build_web_singl": "webpack",
-    "build_web_watch": "node --max_old_space_size=4096 node_modules/webpack/bin/webpack.js --colors --watch",
-    "build_web_hot": "webpack-dev-server --config webpack-hot.config.js --colors --inline --hot"
+    "build_web_watch": "node --max_old_space_size=4096 node_modules/webpack/bin/webpack.js --colors --watch"
   },
   "keywords": [],
   "author": "",
