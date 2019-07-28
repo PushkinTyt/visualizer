@@ -7,7 +7,8 @@
     "test_version": "node -v && npm --version",
     "yarn_install": "yarn",
     "build_web_singl": "webpack",
-    "build_web_watch": "node --max_old_space_size=4096 node_modules/webpack/bin/webpack.js --colors --watch"
+    "build_web_watch": "node --max_old_space_size=4096 node_modules/webpack/bin/webpack.js --colors --watch",
+    "start": "npm run yarn_install && npm run build_web_singl -f && npx open-cli index.html"
   },
   "keywords": [],
   "author": "",
@@ -48,6 +49,7 @@
     "mobx": "4.1.0",
     "mobx-react": "5.0.0",
     "normalize-css": "2.3.1",
+    "open-cli": "^5.0.0",
     "react": "16.2.0",
     "react-bootstrap": "0.31.0",
     "react-dom": "16.2.0",
