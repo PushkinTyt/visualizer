@@ -1,25 +1,25 @@
 # visualizer
 
-Live demo https://pushkintyt.github.io/visualizer/
+Страница с последней сборкой: https://pushkintyt.github.io/visualizer/
 
-# Setup local start:
-To use this you’ll need to install a few things before you have a working copy of the project. But once you have node.js installed it only takes a few seconds and a couple commands to get going.
-
-## 0. Install Git:
+# Настройка для локального запуска:
+Чтобы начать разрабатывать, вам нужно установить несколько вещей, прежде чем вы получите рабочую копию проекта. Но как только вы установили [node.js][node-js], это займет всего несколько секунд и пару команд.
+## 0. Установите GIT:
 
 [GIT Installation Instructions and Links][git-scm]
 
-## 1. Download or Clone this repo:
+## 1. Скопируйте репозиторий:
 
-#### Clone (must've completed Step 0 first):
+Откройте терминал и перейдите в удобную для работы папку.
 
-Navigate into your workspace directory.
-
-Run:
+выполните:
 ```git clone https://github.com/PushkinTyt/visualizer.git```
 
-## 2. Build for and first start
-Navigate into your workspace directory.
+## 2. Сборка и первый запуск
+Откройте терминал и перейдите в папку с проектом.
 
-Run:
+выполните:
 ```npm start```
+
+[git-scm]: https://git-scm.com/book/en/v2/Getting-Started-Installing-Gi
+[node-js]: https://nodejs.org
