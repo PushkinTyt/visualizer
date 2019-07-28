@@ -4,5 +4,4 @@ node_modules/
 ts-compile/
 *.log
 *.iml
-js/
 public/
